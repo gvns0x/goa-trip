@@ -576,12 +576,260 @@
       font-size: 0.82rem;
     }
 
+
+    /* Villa photo gallery */
+    .gallery-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .villa-strip {
+      display: flex;
+      gap: 0.55rem;
+      padding: 0.75rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+
+    .villa-thumb {
+      flex: 0 0 auto;
+      width: 8.4rem;
+      margin: 0;
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      background: var(--surface);
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    .villa-thumb img {
+      display: block;
+      width: 100%;
+      height: 5.4rem;
+      object-fit: cover;
+      background: var(--bg-warm);
+    }
+
+    .villa-thumb span {
+      display: block;
+      padding: 0.35rem 0.45rem 0.45rem;
+      font-size: 0.72rem;
+      font-weight: 650;
+      line-height: 1.25;
+      max-height: 2.3em;
+      overflow: hidden;
+    }
+
+    .villa-thumb[aria-pressed="true"] {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .villa-thumb:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .gallery-stage {
+      position: relative;
+      background: var(--bg-warm);
+    }
+
+    .gallery-stage img {
+      display: block;
+      width: 100%;
+      height: min(68vw, 28rem);
+      object-fit: cover;
+      background: var(--bg-warm);
+    }
+
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2.4rem;
+      height: 2.4rem;
+      border: 0;
+      border-radius: 99px;
+      background: rgba(26, 22, 18, 0.62);
+      color: #fff;
+      font-size: 1.35rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-nav:hover { background: rgba(26, 22, 18, 0.82); }
+    .gallery-nav:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+    .gallery-nav.prev { left: 0.7rem; }
+    .gallery-nav.next { right: 0.7rem; }
+    .gallery-nav[hidden] { display: none; }
+
+    .photo-count {
+      position: absolute;
+      right: 0.75rem;
+      bottom: 0.7rem;
+      margin: 0;
+      padding: 0.2rem 0.5rem;
+      border-radius: 99px;
+      background: rgba(26, 22, 18, 0.62);
+      color: #fff;
+      font-size: 0.78rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .photo-strip {
+      display: flex;
+      gap: 0.4rem;
+      padding: 0.65rem 0.75rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .photo-thumb {
+      flex: 0 0 auto;
+      width: 4.6rem;
+      height: 3.2rem;
+      margin: 0;
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      background: var(--bg-warm);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .photo-thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-thumb[aria-pressed="true"] { border-color: var(--accent); }
+    .photo-thumb:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .villa-details {
+      padding: 1.15rem 1.15rem 1.35rem;
+    }
+
+    .villa-details h3 {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .villa-price {
+      margin: 0.25rem 0 0;
+      font-size: 1.05rem;
+      font-weight: 650;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .villa-price .muted {
+      font-weight: 400;
+      font-size: 0.88rem;
+    }
+
+    .villa-link {
+      display: inline-block;
+      margin: 0.35rem 0 0;
+      font-size: 0.92rem;
+    }
+
+    .fact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.5rem;
+      margin: 1rem 0 0;
+    }
+
+    .fact {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.28rem 0.6rem;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      background: var(--surface-2);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .detail-block {
+      margin: 1.15rem 0 0;
+    }
+
+    .detail-block h4 {
+      margin: 0 0 0.4rem;
+      font-size: 0.7rem;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .detail-block ul {
+      margin: 0;
+      padding: 0 0 0 1.1rem;
+    }
+
+    .detail-block li {
+      margin: 0.15rem 0;
+      font-size: 0.92rem;
+    }
+
+    .amenity-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .amenity-list li {
+      margin: 0;
+      padding: 0.22rem 0.55rem;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      background: var(--surface-2);
+      font-size: 0.8rem;
+    }
+
+    .not-included {
+      margin: 0.55rem 0 0;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+    }
+
     @media (max-width: 700px) {
       .wrap { padding: 1.4rem 0.9rem 3rem; }
       .stats { grid-template-columns: 1fr; }
       th, td { padding: 0.6rem 0.7rem; }
       #pays-table th, #pays-table td { padding: 0.6rem 0.55rem; }
       .gantt { --name-col: 8rem; }
+      .gallery-stage img { height: min(62vw, 22rem); }
+      .villa-thumb { width: 7.4rem; }
+      .villa-details { padding: 1rem 0.9rem 1.2rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -638,27 +886,6 @@
       </div>
     </section>
 
-    <section aria-labelledby="props-heading">
-      <h2 id="props-heading">Properties</h2>
-      <p class="lede">All quotes are for 19–27 Dec, 8 nights, 8 guests. Sorted from cheapest to most expensive.</p>
-      <div class="panel scroll">
-        <table id="props-table">
-          <thead>
-            <tr>
-              <th>Property</th>
-              <th>Area</th>
-              <th>Layout</th>
-              <th class="num">Sleeps</th>
-              <th class="num">Rating</th>
-              <th class="num">Total</th>
-              <th class="num">Per person-night</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </section>
-
     <section aria-labelledby="pays-heading">
       <h2 id="pays-heading">What each person pays</h2>
       <p class="lede">The total is split by covered nights. Everyone pays the same rate for each night they stay inside the 19–27 Dec booking.</p>
@@ -684,6 +911,43 @@
         </table>
       </div>
       <p class="note" id="uncovered-note"></p>
+    </section>
+
+    <section aria-labelledby="props-heading">
+      <h2 id="props-heading">Properties</h2>
+      <p class="lede">All quotes are for 19–27 Dec, 8 nights, 8 guests. Sorted from cheapest to most expensive.</p>
+      <div class="panel scroll">
+        <table id="props-table">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Area</th>
+              <th>Layout</th>
+              <th class="num">Sleeps</th>
+              <th class="num">Rating</th>
+              <th class="num">Total</th>
+              <th class="num">Per person-night</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading">Villa photos</h2>
+      <p class="lede">Tap a villa to switch photos and see what’s on the listing. Totals are for 19–27 Dec, 8 nights.</p>
+      <div class="gallery-panel">
+        <div class="villa-strip" id="villa-strip" role="tablist" aria-label="Villas"></div>
+        <div class="gallery-stage" id="gallery-stage">
+          <button type="button" class="gallery-nav prev" id="photo-prev" aria-label="Previous photo">‹</button>
+          <img id="gallery-main" alt="" width="1200" height="800">
+          <button type="button" class="gallery-nav next" id="photo-next" aria-label="Next photo">›</button>
+          <p class="photo-count" id="photo-count"></p>
+        </div>
+        <div class="photo-strip" id="photo-strip"></div>
+        <div class="villa-details" id="villa-details"></div>
+      </div>
     </section>
 
     <footer class="page-foot">
@@ -896,6 +1160,793 @@
       if (day >= BOOKING.leave && day < DAY_END) parts.push("uncovered");
       return parts.join(" ");
     }
+
+    const listingDetails = {
+      "La Zamora Estate Villa 04": {
+        "propertyType": "Villa in Vagator, Goa",
+        "beds": 3,
+        "checkIn": "2 pm",
+        "checkOut": "11 am",
+        "sleeping": [
+          "Bedroom 1 (ground floor): Double bed, attached washroom, door opening to the pool",
+          "Bedroom 2 (first floor): Double bed, attached washroom, balcony with pool and garden views",
+          "Bedroom 3 (first floor): Double bed, attached washroom, lounge corner",
+          "Extra bed (charges apply): Floor mattress for 1 person"
+        ],
+        "highlights": [
+          "Private pool, 18.4 ft × 10.7 ft, with garden seating",
+          "Carpet area 1,933.22 sq. ft.",
+          "Private terrace and landscaped garden",
+          "Each bedroom has an attached washroom",
+          "Dining area seats 6",
+          "TV and Marshall speaker",
+          "Full generator backup",
+          "Private parking inside the villa, near the entrance",
+          "Chef available on request (ingredients charged at cost)",
+          "Daily housekeeping; towels and linen replenished every 3 nights",
+          "Complimentary high-speed Wi-Fi; cellular coverage for Vi, Airtel and Jio may be limited",
+          "Gated community with 24/7 security",
+          "About 10 minutes from Vagator Beach, Anjuna Beach, Thalassa and Olive"
+        ],
+        "rules": [
+          "Valid ID required at check-in; only registered guests, no visitors",
+          "Loud music not allowed after 10 pm; parties are not allowed",
+          "Security deposit ₹20,000 (short stay) or ₹30,000 (long stay) at check-in",
+          "Smoking only on balconies and outdoor areas; ₹10,000 cleaning fee for indoor smoking",
+          "Drugs are strictly prohibited",
+          "Primary guest must be at least 18",
+          "Pets allowed: max 2, extra ₹10,000 deposit per pet, not allowed in the pool"
+        ],
+        "notes": [
+          "This stay includes Christmas peak dates (24 Dec 2026 – 3 Jan 2027). Peak-date bookings have no refund or credit note if cancelled 0–30 days before check-in."
+        ],
+        "amenities": [
+          "Fresh linen",
+          "GENSET back-up",
+          "WIFI",
+          "24hrs security",
+          "AC",
+          "Daily housekeeping",
+          "Free Parking",
+          "Private plunge pool",
+          "Private pool",
+          "Washing Machine"
+        ],
+        "photos": [
+          {
+            "src": "https://cdn1.thebluekite.com/uploads/property/1622177973-CONF-_DSC3931.webp",
+            "alt": "La Zamora Estate Villa 04"
+          },
+          {
+            "src": "https://cdn1.thebluekite.com/uploads/property/1622458986-CONF-_DSC0550.webp",
+            "alt": "La Zamora Estate Villa 04, photo 2"
+          },
+          {
+            "src": "https://cdn1.thebluekite.com/uploads/property/1622458986-CONF-_DSC0565.webp",
+            "alt": "La Zamora Estate Villa 04, photo 3"
+          },
+          {
+            "src": "https://cdn1.thebluekite.com/uploads/property/1622177966-CONF-_DSC6560.webp",
+            "alt": "La Zamora Estate Villa 04, photo 4"
+          },
+          {
+            "src": "https://cdn1.thebluekite.com/uploads/property/1622177966-CONF-_DSC6647.webp",
+            "alt": "La Zamora Estate Villa 04, photo 5"
+          }
+        ]
+      },
+      "3BR Pvt Pool near Thalassa": {
+        "propertyType": "Entire villa in Siolim",
+        "beds": 4,
+        "sleeping": [
+          "Bedroom 1: King bed, Single bed",
+          "Bedroom 2: King bed",
+          "Bedroom 3: Queen bed"
+        ],
+        "highlights": [
+          "Private plunge pool",
+          "Two living rooms",
+          "Kitchenette and dining area",
+          "Balcony",
+          "Gated villa community",
+          "Self check-in; building staff and housekeeping 10:00–20:00 every day"
+        ],
+        "rules": [
+          "Up to 8 overnight guests",
+          "No pets",
+          "Smoking allowed outdoors only",
+          "Commercial photography allowed",
+          "Celebrations are welcome; outside visitors, additional guests and large gatherings are not permitted",
+          "Keep music at a reasonable volume, especially late"
+        ],
+        "amenities": [
+          "Hairdryer",
+          "Shampoo",
+          "Body soap",
+          "Bidet",
+          "Hot water",
+          "Shower gel",
+          "Washing machine",
+          "Essentials",
+          "Hangers",
+          "Bed linen",
+          "Room-darkening blinds",
+          "Iron",
+          "Clothes drying rack",
+          "Clothes storage: wardrobe and chest of drawers",
+          "TV",
+          "Sound system with Bluetooth and aux",
+          "Air conditioning",
+          "Ceiling fan",
+          "Exterior security cameras on property",
+          "Wifi",
+          "Kitchen",
+          "Fridge",
+          "Microwave",
+          "Cooking basics",
+          "Crockery and cutlery",
+          "Stainless steel gas cooker",
+          "Kettle",
+          "Wine glasses",
+          "Toaster",
+          "Blender",
+          "Dining table",
+          "Private patio or balcony",
+          "Outdoor furniture",
+          "Free parking on premises",
+          "Pool",
+          "Gated community",
+          "Smoking allowed",
+          "Self check-in",
+          "Building staff",
+          "Housekeeping available from 10:00 to 20:00, every day"
+        ],
+        "notIncluded": [
+          "Tumble dryer",
+          "Smoke alarm",
+          "Carbon monoxide alarm",
+          "Heating"
+        ],
+        "photos": [
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1795012544737897511/original/6c29ca06-c6f5-4305-af0f-238e9445c78c.png",
+            "alt": "Patio and pool"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1795012544737897511/original/fc391b45-b731-49ab-af8a-610246280b4f.png",
+            "alt": "Exterior"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1795012544737897511/original/693583e1-b8ba-4a3d-b3d5-89c7ffef59f3.jpeg",
+            "alt": "Dining room and living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1795012544737897511/original/10ec03f7-2da1-4a7e-ac08-5350158df8c3.jpeg",
+            "alt": "Dining room and living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1795012544737897511/original/f7d0fe3d-c1ae-4691-bc9d-acfbcb300853.jpeg",
+            "alt": "Living room and dining room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1795012544737897511/original/7f47d3a7-0bef-445b-a9c0-6d4a6a6a4b6b.jpeg",
+            "alt": "Kitchen and dining room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1795012544737897511/original/64ee991f-744f-4230-9bac-0b843e92b4b9.jpeg",
+            "alt": "Living room and bedroom"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1795012544737897511/original/2e89166c-37e9-4afa-95b7-7809c84891a9.jpeg",
+            "alt": "Living room and bedroom"
+          }
+        ]
+      },
+      "Evaya Zest 3BHK Villa": {
+        "propertyType": "Entire home in Assagao",
+        "beds": 3,
+        "sleeping": [
+          "Bedroom 1: Double bed, Floor mattress",
+          "Bedroom 2: Double bed",
+          "Bedroom 3: Double bed, Floor mattress"
+        ],
+        "highlights": [
+          "Private pool with sun loungers",
+          "Full kitchen, dining area and living room",
+          "Dedicated workspace",
+          "Balcony and patio",
+          "Gated community",
+          "Self check-in; building staff and housekeeping 6 hours a day"
+        ],
+        "rules": [
+          "Up to 8 overnight guests",
+          "Pets allowed",
+          "Smoking is allowed outdoors only; not inside the villa",
+          "Commercial photography allowed",
+          "Parties and amplified music only until 10:00 pm"
+        ],
+        "amenities": [
+          "Hairdryer",
+          "Cleaning products",
+          "Shampoo",
+          "Hot water",
+          "Shower gel",
+          "Washing machine",
+          "Tumble dryer",
+          "Essentials",
+          "Hangers",
+          "Bed linen",
+          "Iron",
+          "Clothes storage: wardrobe",
+          "TV",
+          "Books and reading material",
+          "Air conditioning",
+          "Ceiling fan",
+          "Wifi",
+          "Dedicated workspace",
+          "Kitchen",
+          "Fridge",
+          "Cooking basics",
+          "Gas cooker",
+          "Kettle",
+          "Wine glasses",
+          "Dining table",
+          "Private entrance",
+          "Private patio or balcony",
+          "Outdoor furniture",
+          "Sun loungers",
+          "Free parking on premises",
+          "Pool",
+          "Gated community",
+          "Pets allowed",
+          "Smoking allowed",
+          "Long-term stays allowed",
+          "Self check-in",
+          "Building staff",
+          "Housekeeping available 6 hours a day"
+        ],
+        "notIncluded": [
+          "Smoke alarm",
+          "Carbon monoxide alarm",
+          "Heating"
+        ],
+        "photos": [
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1726780161697151139/original/6269672f-f7e4-41eb-a661-096a1643622b.jpeg",
+            "alt": "Exterior"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1726780161697151139/original/77175bc7-2697-4ce0-9218-44133f2b29c8.jpeg",
+            "alt": "Patio and pool"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1726780161697151139/original/d3c01083-d613-46ec-9a11-c80ce19d500a.jpeg",
+            "alt": "Living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1726780161697151139/original/9a11d6ee-f218-416e-acc5-d7fa7db12ab5.jpeg",
+            "alt": "Backyard and pool"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1726780161697151139/original/b37f1370-d766-4059-a148-065575f8cea4.jpeg",
+            "alt": "Patio and balcony"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1726780161697151139/original/a181d1b9-24a9-4627-80fa-3195aa4f8c51.jpeg",
+            "alt": "Living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1726780161697151139/original/f042503d-f9ba-4f04-b5f3-d204a9b11a4c.jpeg",
+            "alt": "Dining room and living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1726780161697151139/original/e7dc3095-cb35-4fa2-8876-641b98143477.jpeg",
+            "alt": "Living room"
+          }
+        ]
+      },
+      "Banyan Tree Villa": {
+        "propertyType": "Entire home in Siolim",
+        "beds": 4,
+        "sleeping": [
+          "Bedroom 1: King bed, Floor mattress",
+          "Bedroom 2: King bed, Sofa, Floor mattress",
+          "Bedroom 3: King bed, Floor mattress",
+          "Bedroom 4: King bed, Floor mattress"
+        ],
+        "highlights": [
+          "Private pool",
+          "Kitchenette, living room and dining area",
+          "Private back garden and balcony",
+          "Gated community",
+          "Host greets you; cleaning available during stay"
+        ],
+        "rules": [
+          "Up to 8 overnight guests",
+          "Pets allowed",
+          "No parties or events",
+          "No commercial photography"
+        ],
+        "amenities": [
+          "Bath",
+          "Hairdryer",
+          "Cleaning products",
+          "Conditioner",
+          "Body soap",
+          "Hot water",
+          "Washing machine",
+          "Hangers",
+          "Bed linen",
+          "Extra pillows and blankets",
+          "Iron",
+          "Clothes storage: wardrobe and chest of drawers",
+          "TV",
+          "Board games",
+          "Air conditioning",
+          "Ceiling fan",
+          "Exterior security cameras on property",
+          "Fire extinguisher",
+          "First aid kit",
+          "Wifi",
+          "Kitchen",
+          "Fridge",
+          "Microwave",
+          "Cooking basics",
+          "Crockery and cutlery",
+          "Stainless steel gas cooker",
+          "Kettle",
+          "Dining table",
+          "Coffee",
+          "Breadmaker",
+          "Private patio or balcony",
+          "Private back garden",
+          "Outdoor furniture",
+          "Free parking on premises",
+          "Pool",
+          "Gated community",
+          "Pets allowed",
+          "Cleaning available during stay",
+          "Host greets you"
+        ],
+        "notIncluded": [
+          "Tumble dryer",
+          "Essentials",
+          "Smoke alarm",
+          "Carbon monoxide alarm",
+          "Heating"
+        ],
+        "photos": [
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1712031567276607491/original/fca23aba-7dca-4e9d-98ed-2d6052e8a2b4.jpeg",
+            "alt": "Exterior and pool"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1712031567276607491/original/f129c260-76ef-4719-a4dc-4b5bb0f6bf30.jpeg",
+            "alt": "Dining room and living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1712031567276607491/original/2586bf9e-1631-4882-b44c-aa353b98cd38.jpeg",
+            "alt": "Dining room and living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1712031567276607491/original/9352a458-b751-419d-b447-d17ebf5af597.jpeg",
+            "alt": "Office and living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1712031567276607491/original/ac58f389-33d2-415c-8a38-3b2b355c2219.jpeg",
+            "alt": "Living room and bedroom"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1712031567276607491/original/7b5a949f-706e-4aa2-bf82-db704f22116e.jpeg",
+            "alt": "Dining room and living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1712031567276607491/original/3eb72ddc-e037-448d-9d33-daa6b329e063.jpeg",
+            "alt": "Living room and bedroom"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1712031567276607491/original/0e1ede23-10e1-4fa6-867d-47c2ab724c02.jpeg",
+            "alt": "Living room and bedroom"
+          }
+        ]
+      },
+      "4BR Villa with pool and lift": {
+        "propertyType": "Entire villa in Arpora",
+        "beds": 5,
+        "sleeping": [
+          "Bedroom 1: King bed, Sofa bed",
+          "Bedroom 2: King bed",
+          "Bedroom 3: Queen bed",
+          "Bedroom 4: King bed"
+        ],
+        "highlights": [
+          "Private outdoor pool, open all year, 24 hours, with sun loungers",
+          "Private hot tub, available all year",
+          "Lift",
+          "Gym, cinema, games room and pool table",
+          "Shared sauna and shared gym nearby",
+          "Private back garden (fully fenced), front gardens and balcony",
+          "Club house pool is open 7 am–7 pm; proper swimwear required",
+          "Free driveway parking for 2 cars",
+          "Park view, river view, waterfront and lake access",
+          "Self check-in; building staff and housekeeping 09:00–17:00 every day",
+          "Mobile networks in Goa can be patchy"
+        ],
+        "rules": [
+          "Up to 10 overnight guests",
+          "No pets",
+          "No smoking; smoke or vape only in open areas",
+          "Quiet hours; keep music and noise low after 8 pm",
+          "No parties or events",
+          "No commercial photography",
+          "Security checks guest IDs at check-in"
+        ],
+        "amenities": [
+          "Park view",
+          "River view",
+          "Bath",
+          "Hairdryer",
+          "Cleaning products",
+          "Shampoo",
+          "Bidet",
+          "Outdoor shower",
+          "Hot water",
+          "Shower gel",
+          "Free washer – In unit",
+          "Free dryer – In unit",
+          "Hangers",
+          "Bed linen",
+          "Extra pillows and blankets",
+          "Room-darkening blinds",
+          "Iron",
+          "Clothes drying rack",
+          "Safe",
+          "Clothes storage: wardrobe, wardrobe and chest of drawers",
+          "55-inch HDTV",
+          "Exercise equipment",
+          "Pool table",
+          "Books and reading material",
+          "Cinema",
+          "Outdoor playground",
+          "AC – split-type ductless system",
+          "Ceiling fan",
+          "Heating",
+          "Exterior security cameras on property",
+          "Fire extinguisher",
+          "First aid kit",
+          "Wifi",
+          "Kitchen",
+          "Fridge",
+          "Microwave",
+          "Cooking basics",
+          "Crockery and cutlery",
+          "Freezer",
+          "Dishwasher",
+          "Gas cooker",
+          "Single oven",
+          "Kettle",
+          "Wine glasses",
+          "Toaster",
+          "Blender",
+          "Rice cooker",
+          "Dining table",
+          "Coffee",
+          "Waterfront",
+          "Lake access",
+          "Private entrance",
+          "Private patio or balcony",
+          "Private back garden – Fully fenced",
+          "Outdoor furniture",
+          "Outdoor dining area",
+          "Sun loungers",
+          "Free driveway parking on premises – 2 spaces",
+          "Private outdoor pool – available all year, open 24 hours",
+          "Private hot tub – available all year",
+          "Shared sauna",
+          "Lift",
+          "Shared gym nearby",
+          "Luggage drop-off allowed",
+          "Long-term stays allowed",
+          "Self check-in",
+          "Building staff",
+          "Housekeeping available from 09:00 to 17:00, every day"
+        ],
+        "notIncluded": [
+          "Essentials",
+          "Smoke alarm",
+          "Carbon monoxide alarm"
+        ],
+        "photos": [
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1561404763544288044/original/4200a096-4d0b-46e6-a881-b582992038fe.jpeg",
+            "alt": "Exterior and pool"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1561404763544288044/original/351374b9-6d6d-49ac-a5b6-012edc9f4bb6.jpeg",
+            "alt": "Dining room and living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1561404763544288044/original/929d9c19-feaf-4855-bbc7-3a10eca49351.jpeg",
+            "alt": "Patio and balcony"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1561404763544288044/original/3c60461b-060d-45ed-a557-489dd89ebed5.jpeg",
+            "alt": "Backyard and pool"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1561404763544288044/original/31a0a3c1-cfea-49c3-bc8d-a692adb956e0.jpeg",
+            "alt": "Exterior"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1561404763544288044/original/8772bdba-814b-43f0-a299-8663aeae79de.jpeg",
+            "alt": "Bedroom and living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1561404763544288044/original/b9b9f182-c750-4277-af2b-6cb8d6e6272e.jpeg",
+            "alt": "Living room and dining room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1561404763544288044/original/a17e1969-3155-4d16-9463-13477577c6c7.jpeg",
+            "alt": "Dining room and living room"
+          }
+        ]
+      },
+      "4BHK Pet-friendly Villa": {
+        "propertyType": "Entire villa in Siolim",
+        "beds": 4,
+        "sleeping": [
+          "Bedroom 1: King bed",
+          "Bedroom 2: King bed",
+          "Bedroom 3: King bed",
+          "Bedroom 4: King bed"
+        ],
+        "highlights": [
+          "Private pool",
+          "Lift",
+          "Full kitchen, dining area and living room",
+          "Terrace and private patio or balcony",
+          "Self check-in; building staff and cleaning available during stay"
+        ],
+        "rules": [
+          "Up to 12 overnight guests",
+          "Pets allowed; one-time pet sanitation fee of ₹4,000 at check-in",
+          "Pets are not allowed in the pool; a ₹20,000 care charge applies if this is overlooked",
+          "No smoking",
+          "No parties or events",
+          "Commercial photography allowed"
+        ],
+        "amenities": [
+          "Hairdryer",
+          "Cleaning products",
+          "Vinci shampoo",
+          "Vinci conditioner",
+          "Vinci body soap",
+          "Hot water",
+          "Shower gel",
+          "Washing machine",
+          "Essentials",
+          "Hangers",
+          "Bed linen",
+          "Iron",
+          "Safe",
+          "Clothes storage",
+          "TV",
+          "Board games",
+          "Air conditioning",
+          "Ceiling fan",
+          "Exterior security cameras on property",
+          "Fire extinguisher",
+          "First aid kit",
+          "Wifi",
+          "Kitchen",
+          "Fridge",
+          "Microwave",
+          "Cooking basics",
+          "Crockery and cutlery",
+          "Kettle",
+          "Wine glasses",
+          "Toaster",
+          "Blender",
+          "Rice cooker",
+          "Private entrance",
+          "Private patio or balcony",
+          "Free parking on premises",
+          "Pool",
+          "Lift",
+          "Pets allowed",
+          "Long-term stays allowed",
+          "Self check-in",
+          "Building staff",
+          "Cleaning available during stay"
+        ],
+        "notIncluded": [
+          "Smoke alarm",
+          "Carbon monoxide alarm",
+          "Heating"
+        ],
+        "photos": [
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1325082124967588435/original/eec82492-1721-46d2-8326-508fcdc2bcba.jpeg",
+            "alt": "Exterior and pool"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1325082124967588435/original/976f78c0-45f5-4a6e-857d-e7c2d3c6dff7.jpeg",
+            "alt": "Exterior"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1325082124967588435/original/7983577e-6738-4480-9a2b-f829953773a7.jpeg",
+            "alt": "Dining room and living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1325082124967588435/original/f9e08beb-c9c2-4621-a311-c1536a90ebc8.jpeg",
+            "alt": "Living room and dining room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1325082124967588435/original/ce83dd77-e1ff-4734-9cf9-fe147de41b7f.jpeg",
+            "alt": "Living room and bedroom"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1325082124967588435/original/e3039d72-f453-4800-8d55-18a29a8d1bac.jpeg",
+            "alt": "Exterior"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1325082124967588435/original/0537ae5b-c1da-4f03-ba0b-46ec1db65e0f.jpeg",
+            "alt": "Dining room and living room"
+          },
+          {
+            "src": "https://a0.muscache.com/im/pictures/hosting/Hosting-1325082124967588435/original/875b95d0-1ff3-470a-91c8-a453796bf190.jpeg",
+            "alt": "Living room and bedroom"
+          }
+        ]
+      }
+    };
+
+    function esc(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function detailsOf(p) {
+      return listingDetails[p.name] || { photos: [] };
+    }
+
+    let selectedVilla = 0;
+    let selectedPhoto = 0;
+
+    function currentVilla() {
+      return pricedProperties[selectedVilla];
+    }
+
+    function currentPhotos() {
+      return detailsOf(currentVilla()).photos || [];
+    }
+
+    function selectVilla(index, photoIndex) {
+      selectedVilla = index;
+      selectedPhoto = photoIndex == null ? 0 : photoIndex;
+      const photos = currentPhotos();
+      if (selectedPhoto < 0) selectedPhoto = Math.max(photos.length - 1, 0);
+      if (selectedPhoto >= photos.length) selectedPhoto = 0;
+      renderGallery();
+    }
+
+    function stepPhoto(delta) {
+      const photos = currentPhotos();
+      if (!photos.length) return;
+      selectVilla(selectedVilla, (selectedPhoto + delta + photos.length) % photos.length);
+    }
+
+    function renderGallery() {
+      const p = currentVilla();
+      const d = detailsOf(p);
+      const photos = d.photos || [];
+      const strip = document.getElementById("villa-strip");
+      strip.innerHTML = pricedProperties.map((item, i) => {
+        const shot = (detailsOf(item).photos || [])[0];
+        const src = shot ? shot.src : "";
+        return `
+          <button type="button" class="villa-thumb" role="tab" id="villa-tab-${i}" aria-selected="${i === selectedVilla ? "true" : "false"}" aria-pressed="${i === selectedVilla ? "true" : "false"}" aria-controls="gallery-stage" data-villa="${i}">
+            ${src ? `<img src="${esc(src)}" alt="" loading="lazy" width="200" height="130">` : ""}
+            <span>${esc(item.name)}</span>
+          </button>
+        `;
+      }).join("");
+      strip.querySelectorAll(".villa-thumb").forEach((btn) => {
+        btn.addEventListener("click", () => selectVilla(Number(btn.dataset.villa), 0));
+      });
+      const activeThumb = strip.querySelector(".villa-thumb[aria-pressed='true']");
+      if (activeThumb && typeof activeThumb.scrollIntoView === "function") {
+        activeThumb.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
+      }
+
+      const main = document.getElementById("gallery-main");
+      const prev = document.getElementById("photo-prev");
+      const next = document.getElementById("photo-next");
+      const count = document.getElementById("photo-count");
+      const photoStrip = document.getElementById("photo-strip");
+
+      if (!photos.length) {
+        main.removeAttribute("src");
+        main.alt = "No listing photos found for this villa";
+        prev.hidden = true;
+        next.hidden = true;
+        count.textContent = "";
+        photoStrip.innerHTML = "";
+      } else {
+        const shot = photos[selectedPhoto];
+        main.src = shot.src;
+        main.alt = shot.alt || p.name;
+        main.loading = selectedPhoto === 0 ? "eager" : "lazy";
+        prev.hidden = photos.length < 2;
+        next.hidden = photos.length < 2;
+        count.textContent = photos.length > 1 ? `${selectedPhoto + 1} / ${photos.length}` : "";
+        photoStrip.innerHTML = photos.map((photo, i) => `
+          <button type="button" class="photo-thumb" aria-pressed="${i === selectedPhoto ? "true" : "false"}" aria-label="${esc(photo.alt || "Photo " + (i + 1))}" data-photo="${i}">
+            <img src="${esc(photo.src)}" alt="" loading="lazy" width="120" height="80">
+          </button>
+        `).join("");
+        photoStrip.querySelectorAll(".photo-thumb").forEach((btn) => {
+          btn.addEventListener("click", () => selectVilla(selectedVilla, Number(btn.dataset.photo)));
+        });
+        const active = photoStrip.querySelector(".photo-thumb[aria-pressed='true']");
+        if (active && typeof active.scrollIntoView === "function") {
+          active.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
+        }
+      }
+
+      const bathsLabel = p.baths === 1 ? "1 bathroom" : `${p.baths} bathrooms`;
+      const bedLabel = p.bedrooms === 1 ? "1 bedroom" : `${p.bedrooms} bedrooms`;
+      const beds = d.beds;
+      const facts = [
+        d.propertyType || p.area,
+        `Sleeps ${p.sleeps}`,
+        bedLabel,
+        beds ? (beds === 1 ? "1 bed" : `${beds} beds`) : "",
+        bathsLabel,
+        p.pool,
+        p.rating != null ? `${ratingOf(p)}` : ""
+      ].filter(Boolean);
+
+      const checkBits = [];
+      if (d.checkIn) checkBits.push(`Check-in ${d.checkIn}`);
+      if (d.checkOut) checkBits.push(`Check-out ${d.checkOut}`);
+
+      function listBlock(title, items, cls) {
+        if (!items || !items.length) return "";
+        const lis = items.map((item) => `<li>${esc(item)}</li>`).join("");
+        const ulClass = cls ? ` class="${cls}"` : "";
+        return `<div class="detail-block"><h4>${esc(title)}</h4><ul${ulClass}>${lis}</ul></div>`;
+      }
+
+      const notInc = d.notIncluded && d.notIncluded.length
+        ? `<p class="not-included">Not included: ${esc(d.notIncluded.join(", "))}.</p>`
+        : "";
+
+      document.getElementById("villa-details").innerHTML = `
+        <h3>${esc(p.name)}</h3>
+        <p class="villa-price">${inr(p.total)} <span class="muted">total · ${inr(p.rate)} per person-night</span></p>
+        <a class="villa-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">Open listing</a>
+        <div class="fact-row">${facts.map((f) => `<span class="fact">${esc(f)}</span>`).join("")}</div>
+        ${checkBits.length ? `<p class="note">${esc(checkBits.join(" · "))}.</p>` : ""}
+        ${listBlock("Sleeping arrangements", d.sleeping)}
+        ${listBlock("Also listed", d.highlights)}
+        ${listBlock("House rules", d.rules)}
+        ${listBlock("Amenities", d.amenities, "amenity-list")}
+        ${notInc}
+        ${listBlock("Good to know", d.notes)}
+      `;
+    }
+
+    document.getElementById("photo-prev").addEventListener("click", () => stepPhoto(-1));
+    document.getElementById("photo-next").addEventListener("click", () => stepPhoto(1));
+    document.getElementById("gallery-stage").addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") { event.preventDefault(); stepPhoto(-1); }
+      if (event.key === "ArrowRight") { event.preventDefault(); stepPhoto(1); }
+    });
+    document.getElementById("gallery-stage").setAttribute("tabindex", "0");
 
     function renderStats() {
       document.getElementById("stats").innerHTML = `
@@ -1111,6 +2162,7 @@
     renderChart();
     renderProperties();
     renderSelect();
+    renderGallery();
   </script>
 </body>
 </html>
