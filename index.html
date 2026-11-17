@@ -367,7 +367,7 @@
     td { font-size: 0.95rem; }
     #stays-table td, #stays-table th,
     #props-table td, #props-table th,
-    #pays-table td, #pays-table th { white-space: nowrap; }
+    .villa-pays td, .villa-pays th { white-space: nowrap; }
     #props-table { min-width: 52rem; }
     td.num, th.num { text-align: right; }
     tr:last-child td { border-bottom: 0; }
@@ -598,7 +598,7 @@
 
     .villa-thumb {
       flex: 0 0 auto;
-      width: 8.4rem;
+      width: 9.6rem;
       margin: 0;
       padding: 0;
       border: 2px solid transparent;
@@ -619,14 +619,25 @@
       background: var(--bg-warm);
     }
 
-    .villa-thumb span {
+    .villa-thumb-meta {
       display: block;
-      padding: 0.35rem 0.45rem 0.45rem;
+      padding: 0.4rem 0.5rem 0.5rem;
+    }
+
+    .villa-thumb-name {
+      display: block;
       font-size: 0.72rem;
       font-weight: 650;
-      line-height: 1.25;
-      max-height: 2.3em;
-      overflow: hidden;
+      line-height: 1.3;
+    }
+
+    .villa-thumb-price {
+      display: block;
+      margin-top: 0.2rem;
+      font-size: 0.7rem;
+      font-weight: 650;
+      font-variant-numeric: tabular-nums;
+      color: var(--ink-soft);
     }
 
     .villa-thumb[aria-pressed="true"] {
@@ -728,10 +739,57 @@
     }
 
     .villa-details {
-      padding: 1.15rem 1.15rem 1.35rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+      gap: 0;
+      align-items: start;
+      border-top: 0;
     }
 
-    .villa-details h3 {
+    .villa-info {
+      padding: 1.15rem 1.15rem 1.35rem;
+      border-right: 1px solid var(--line);
+      min-width: 0;
+    }
+
+    .villa-pays {
+      padding: 1.15rem 1.15rem 1.35rem;
+      background: var(--surface-2);
+      min-width: 0;
+    }
+
+    .villa-pays h3 {
+      margin: 0 0 0.35rem;
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .villa-pays .rate-chip {
+      margin: 0 0 0.75rem;
+    }
+
+    .villa-pays .warn {
+      margin-bottom: 0.75rem;
+    }
+
+    .villa-pays .scroll {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      overflow-x: auto;
+    }
+
+    .villa-pays table {
+      min-width: 16rem;
+    }
+
+    .villa-pays .note {
+      margin-top: 0.75rem;
+    }
+
+    .villa-details .villa-info h3 {
       margin: 0;
       font-family: var(--font-serif);
       font-size: 1.35rem;
@@ -798,38 +856,23 @@
       font-size: 0.92rem;
     }
 
-    .amenity-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      padding: 0;
-      list-style: none;
-    }
-
-    .amenity-list li {
-      margin: 0;
-      padding: 0.22rem 0.55rem;
-      border: 1px solid var(--line);
-      border-radius: 99px;
-      background: var(--surface-2);
-      font-size: 0.8rem;
-    }
-
-    .not-included {
-      margin: 0.55rem 0 0;
-      font-size: 0.82rem;
-      color: var(--ink-soft);
+    @media (max-width: 900px) {
+      .villa-details { grid-template-columns: 1fr; }
+      .villa-info {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
     }
 
     @media (max-width: 700px) {
       .wrap { padding: 1.4rem 0.9rem 3rem; }
       .stats { grid-template-columns: 1fr; }
       th, td { padding: 0.6rem 0.7rem; }
-      #pays-table th, #pays-table td { padding: 0.6rem 0.55rem; }
+      .villa-pays th, .villa-pays td { padding: 0.6rem 0.55rem; }
       .gantt { --name-col: 8rem; }
       .gallery-stage img { height: min(62vw, 22rem); }
-      .villa-thumb { width: 7.4rem; }
-      .villa-details { padding: 1rem 0.9rem 1.2rem; }
+      .villa-thumb { width: 8.6rem; }
+      .villa-info, .villa-pays { padding: 1rem 0.9rem 1.2rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -845,6 +888,22 @@
       <p class="subtitle">19–28 Dec 2026</p>
       <div class="stats" id="stats"></div>
     </header>
+
+    <section aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading">Villa photos</h2>
+      <p class="lede">Tap a villa to switch photos and see what’s on the listing. Totals are for 19–27 Dec, 8 nights.</p>
+      <div class="gallery-panel">
+        <div class="villa-strip" id="villa-strip" role="tablist" aria-label="Villas"></div>
+        <div class="gallery-stage" id="gallery-stage">
+          <button type="button" class="gallery-nav prev" id="photo-prev" aria-label="Previous photo">‹</button>
+          <img id="gallery-main" alt="" width="1200" height="800">
+          <button type="button" class="gallery-nav next" id="photo-next" aria-label="Next photo">›</button>
+          <p class="photo-count" id="photo-count"></p>
+        </div>
+        <div class="photo-strip" id="photo-strip"></div>
+        <div class="villa-details" id="villa-details"></div>
+      </div>
+    </section>
 
     <section aria-labelledby="timeline-heading">
       <h2 id="timeline-heading">Who is there when</h2>
@@ -886,33 +945,6 @@
       </div>
     </section>
 
-    <section aria-labelledby="pays-heading">
-      <h2 id="pays-heading">What each person pays</h2>
-      <p class="lede">The total is split by covered nights. Everyone pays the same rate for each night they stay inside the 19–27 Dec booking.</p>
-      <div class="toolbar">
-        <label class="field">
-          Property
-          <select id="property-select"></select>
-        </label>
-        <p class="rate-chip" id="rate-chip"></p>
-      </div>
-      <div class="warn" id="sleeps-warn" role="status"></div>
-      <div class="panel scroll">
-        <table id="pays-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th class="num">Covered nights</th>
-              <th class="num">Amount</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-          <tfoot></tfoot>
-        </table>
-      </div>
-      <p class="note" id="uncovered-note"></p>
-    </section>
-
     <section aria-labelledby="props-heading">
       <h2 id="props-heading">Properties</h2>
       <p class="lede">All quotes are for 19–27 Dec, 8 nights, 8 guests. Sorted from cheapest to most expensive.</p>
@@ -934,24 +966,8 @@
       </div>
     </section>
 
-    <section aria-labelledby="gallery-heading">
-      <h2 id="gallery-heading">Villa photos</h2>
-      <p class="lede">Tap a villa to switch photos and see what’s on the listing. Totals are for 19–27 Dec, 8 nights.</p>
-      <div class="gallery-panel">
-        <div class="villa-strip" id="villa-strip" role="tablist" aria-label="Villas"></div>
-        <div class="gallery-stage" id="gallery-stage">
-          <button type="button" class="gallery-nav prev" id="photo-prev" aria-label="Previous photo">‹</button>
-          <img id="gallery-main" alt="" width="1200" height="800">
-          <button type="button" class="gallery-nav next" id="photo-next" aria-label="Next photo">›</button>
-          <p class="photo-count" id="photo-count"></p>
-        </div>
-        <div class="photo-strip" id="photo-strip"></div>
-        <div class="villa-details" id="villa-details"></div>
-      </div>
-    </section>
-
     <footer class="page-foot">
-      Airbnb prices were converted from USD at ₹93.96/$ on 17 Nov 2026 and are approximate. Totals include fees as shown at the time.
+      Airbnb prices were converted from USD at ₹93.96/$ on 17 Nov 2026 and are approximate. Totals include fees as shown at the time. StayVista totals are the amount payable on 17 Nov 2026 for 19–27 Dec, including tax, after a 20% discount.
     </footer>
   </div>
 
@@ -1061,6 +1077,58 @@
         rating: 4.94,
         reviews: 49,
         url: "https://www.airbnb.co.uk/rooms/1325082124967588435?check_in=2026-12-19&check_out=2026-12-27&adults=8"
+      },
+      {
+        name: "The YG Manor",
+        area: "Anjuna",
+        source: "StayVista",
+        totalInr: 443300,
+        sleeps: 10,
+        bedrooms: 4,
+        baths: 4,
+        pool: "private pool",
+        rating: 4.9,
+        reviews: 20,
+        url: "https://www.stayvista.com/villa/the-yg-manor?checkin=2026-12-19&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=4"
+      },
+      {
+        name: "Villa Amethyst",
+        area: "Saligao",
+        source: "StayVista",
+        totalInr: 321101,
+        sleeps: 12,
+        bedrooms: 4,
+        baths: 4,
+        pool: "shared pool",
+        rating: 4.33,
+        reviews: 98,
+        url: "https://www.stayvista.com/villa/villa-amethyst-saligao-4-bhk-villa-in-goa-with-spacious-rooms?checkin=2026-12-19&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=4"
+      },
+      {
+        name: "Casa De Sai",
+        area: "Assagao",
+        source: "StayVista",
+        totalInr: 444178,
+        sleeps: 10,
+        bedrooms: 4,
+        baths: 4,
+        pool: "private pool",
+        rating: 4.8,
+        reviews: 12,
+        url: "https://www.stayvista.com/villa/casa-de-sai?checkin=2026-12-19&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=4"
+      },
+      {
+        name: "Casa Joe",
+        area: "Vagator",
+        source: "StayVista",
+        totalInr: 433733,
+        sleeps: 8,
+        bedrooms: 3,
+        baths: 4,
+        pool: "private pool",
+        rating: 4.8,
+        reviews: 73,
+        url: "https://www.stayvista.com/villa/casa-joe?checkin=2026-12-19&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=3"
       }
     ];
 
@@ -1798,6 +1866,148 @@
             "alt": "Living room and bedroom"
           }
         ]
+      },
+      "The YG Manor": {
+        "propertyType": "Villa in Anjuna, Goa",
+        "beds": 4,
+        "checkIn": "2 pm",
+        "checkOut": "11 am",
+        "sleeping": [
+          "Bedroom 1 (ground floor): King bed, foldable mattress, ensuite",
+          "Bedroom 2 (first floor): King bed, foldable mattress, ensuite, balcony",
+          "Bedroom 3 (first floor): King bed, foldable mattress, ensuite, balcony",
+          "Bedroom 4 (second floor): King bed, foldable mattress, ensuite, balcony"
+        ],
+        "rules": [
+          "Up to 10 guests",
+          "Not pet-friendly",
+          "Smoking only in exterior areas",
+          "Keep noise down after 10 pm",
+          "No outside vendors",
+          "All-male groups: ₹10,000 security deposit",
+          "Kitchen use is ₹1,000 per day",
+          "Private pool 17 ft × 8 ft, 4.5 ft deep, open 8 am–10 pm",
+          "Gated community; caretaker 9 am–6 pm"
+        ],
+        "notes": [
+          "StayVista amount payable ₹4,43,300 for 19–27 Dec, 4 rooms, including tax, after a 20% discount."
+        ],
+        "photos": [
+          { "src": "https://img.vistarooms.com/gallery/the-yg-manor-2684fa.jpg", "alt": "Exterior" },
+          { "src": "https://img.vistarooms.com/gallery/the-yg-manor-06c65b.jpeg", "alt": "Outdoors" },
+          { "src": "https://img.vistarooms.com/gallery/the-yg-manor-a3dd24.jpg", "alt": "The YG Manor" },
+          { "src": "https://img.vistarooms.com/gallery/the-yg-manor-88a525.jpg", "alt": "The YG Manor" },
+          { "src": "https://img.vistarooms.com/gallery/the-yg-manor-9a6c0b.jpg", "alt": "The YG Manor" },
+          { "src": "https://img.vistarooms.com/gallery/the-yg-manor-610793.jpg", "alt": "The YG Manor" },
+          { "src": "https://img.vistarooms.com/gallery/the-yg-manor-3b7c03.jpg", "alt": "The YG Manor" },
+          { "src": "https://img.vistarooms.com/gallery/the-yg-manor-ac8208.jpg", "alt": "The YG Manor" }
+        ]
+      },
+      "Villa Amethyst": {
+        "propertyType": "Villa in Saligao, Goa",
+        "beds": 4,
+        "checkIn": "2 pm",
+        "checkOut": "11 am",
+        "sleeping": [
+          "Bedroom 1 (ground floor): Queen bed, garden view, ensuite",
+          "Bedroom 2 (first floor): Queen bed, balcony and pool view, ensuite with bathtub",
+          "Bedroom 3 (first floor): Queen bed, balcony, ensuite",
+          "Bedroom 4 (first floor): Queen bed, balcony, ensuite"
+        ],
+        "rules": [
+          "Up to 12 guests",
+          "The pool is shared with another villa, 4.5 ft deep",
+          "Private jacuzzi on the terrace",
+          "Not pet-friendly",
+          "All-male groups only if everyone is over 30",
+          "Smoking only in exterior areas",
+          "Keep noise down after 10 pm",
+          "Kitchen is included for guest cooking"
+        ],
+        "notes": [
+          "StayVista amount payable ₹3,21,101 for 19–27 Dec, 4 rooms, including tax, after a 20% discount."
+        ],
+        "photos": [
+          { "src": "https://img.vistarooms.com/gallery/villa-amethyst-1d5ed9.jpg", "alt": "Swimming pool" },
+          { "src": "https://img.vistarooms.com/gallery/villa-amethyst-0a678a.jpg", "alt": "View" },
+          { "src": "https://img.vistarooms.com/gallery/villa-amethyst-b95efd.jpg", "alt": "Outdoor fireplace" },
+          { "src": "https://img.vistarooms.com/gallery/villa-amethyst-f9e15a.jpg", "alt": "Garden" },
+          { "src": "https://img.vistarooms.com/gallery/villa-amethyst-15cab5.jpg", "alt": "Sitting area" },
+          { "src": "https://img.vistarooms.com/gallery/villa-amethyst-367649.jpg", "alt": "Living room" },
+          { "src": "https://img.vistarooms.com/gallery/villa-amethyst-6c7ec5.jpg", "alt": "Dining area" },
+          { "src": "https://img.vistarooms.com/gallery/villa-amethyst-c8150f.jpg", "alt": "Bedroom" }
+        ]
+      },
+      "Casa De Sai": {
+        "propertyType": "Villa in Assagao, Goa",
+        "beds": 4,
+        "checkIn": "2 pm",
+        "checkOut": "11 am",
+        "sleeping": [
+          "Bedroom 1 (first floor): bed, foldable bed, ensuite, balcony",
+          "Bedroom 2 (first floor): bed, ensuite, balcony",
+          "Bedroom 3 (second floor): bed, ensuite, balcony",
+          "Bedroom 4 (second floor): bed, foldable bed, ensuite with bathtub, balcony"
+        ],
+        "rules": [
+          "Up to 10 guests",
+          "Not pet-friendly",
+          "Private pool 20 ft × 8 ft, 4.5 ft deep, open 8 am–10 pm, with loungers",
+          "Kitchen is for reheating only",
+          "All-male groups: ₹15,000 security deposit",
+          "Smoking only in exterior areas",
+          "Keep noise down after 10 pm",
+          "No outside vendors",
+          "Standalone house; caretaker 9:30 am–6:30 pm"
+        ],
+        "notes": [
+          "StayVista amount payable ₹4,44,178 for 19–27 Dec, 4 rooms, including tax, after a 20% discount."
+        ],
+        "photos": [
+          { "src": "https://img.vistarooms.com/gallery/casa-de-sai-2de49a.jpg", "alt": "Swimming pool" },
+          { "src": "https://img.vistarooms.com/gallery/casa-de-sai-bc9d75.jpg", "alt": "Living room" },
+          { "src": "https://img.vistarooms.com/gallery/casa-de-sai-67f7e8.jpg", "alt": "Bedroom" },
+          { "src": "https://img.vistarooms.com/gallery/casa-de-sai-7e9610.jpg", "alt": "Casa De Sai" },
+          { "src": "https://img.vistarooms.com/gallery/casa-de-sai-e05247.jpg", "alt": "Bathroom" },
+          { "src": "https://img.vistarooms.com/gallery/casa-de-sai-555fb8.jpg", "alt": "Balcony" },
+          { "src": "https://img.vistarooms.com/gallery/casa-de-sai-4f4fe6.jpg", "alt": "Dining area" },
+          { "src": "https://img.vistarooms.com/gallery/casa-de-sai-40329c.jpg", "alt": "Bedroom" }
+        ]
+      },
+      "Casa Joe": {
+        "propertyType": "Villa in Vagator, Goa",
+        "beds": 3,
+        "checkIn": "2 pm",
+        "checkOut": "11 am",
+        "sleeping": [
+          "Bedroom 1 (ground floor): bed, rollaway bed, ensuite, balcony",
+          "Bedroom 2 (first floor): bed, rollaway bed, TV, ensuite, balcony",
+          "Bedroom 3 (second floor): bed, ensuite",
+          "3 ensuite bathrooms and 1 shared bathroom; one has a bathtub"
+        ],
+        "rules": [
+          "Up to 8 guests",
+          "Pets allowed",
+          "Private pool about 25 ft × 8 ft, 4 ft deep, open 8 am–10 pm",
+          "Complimentary e-cycles",
+          "All-male groups: ₹20,000 security deposit",
+          "Smoking only in exterior areas",
+          "Keep noise down after 10 pm",
+          "Gated community; caretaker 8 am–8 pm"
+        ],
+        "notes": [
+          "StayVista amount payable ₹4,33,733 for 19–27 Dec, 3 rooms, including tax, after a 20% discount."
+        ],
+        "photos": [
+          { "src": "https://img.vistarooms.com/gallery/casa-joe-f603c5.jpg", "alt": "Exterior" },
+          { "src": "https://img.vistarooms.com/gallery/casa-joe-6e78ad.jpg", "alt": "Swimming pool" },
+          { "src": "https://img.vistarooms.com/gallery/casa-joe-be9ff7.jpg", "alt": "Living room" },
+          { "src": "https://img.vistarooms.com/gallery/casa-joe-375df0.jpg", "alt": "Balcony" },
+          { "src": "https://img.vistarooms.com/gallery/casa-joe-e77979.jpg", "alt": "Games" },
+          { "src": "https://img.vistarooms.com/gallery/casa-joe-35fa23.jpg", "alt": "Bedroom" },
+          { "src": "https://img.vistarooms.com/gallery/casa-joe-c87a48.jpg", "alt": "Bathroom" },
+          { "src": "https://img.vistarooms.com/gallery/casa-joe-8d552a.jpg", "alt": "Bathtub" }
+        ]
       }
     };
 
@@ -1816,6 +2026,18 @@
     let selectedVilla = 0;
     let selectedPhoto = 0;
 
+    function scrollStripHorizontally(strip, active) {
+      if (!strip || !active) return;
+      const pad = 12;
+      const left = active.offsetLeft;
+      const right = left + active.offsetWidth;
+      if (left < strip.scrollLeft + pad) {
+        strip.scrollTo({ left: Math.max(0, left - pad), behavior: "smooth" });
+      } else if (right > strip.scrollLeft + strip.clientWidth - pad) {
+        strip.scrollTo({ left: right - strip.clientWidth + pad, behavior: "smooth" });
+      }
+    }
+
     function currentVilla() {
       return pricedProperties[selectedVilla];
     }
@@ -1825,12 +2047,14 @@
     }
 
     function selectVilla(index, photoIndex) {
+      const villaChanged = index !== selectedVilla;
       selectedVilla = index;
       selectedPhoto = photoIndex == null ? 0 : photoIndex;
       const photos = currentPhotos();
       if (selectedPhoto < 0) selectedPhoto = Math.max(photos.length - 1, 0);
       if (selectedPhoto >= photos.length) selectedPhoto = 0;
-      renderGallery();
+      if (villaChanged) renderGallery();
+      else updatePhotoStage();
     }
 
     function stepPhoto(delta) {
@@ -1839,29 +2063,9 @@
       selectVilla(selectedVilla, (selectedPhoto + delta + photos.length) % photos.length);
     }
 
-    function renderGallery() {
+    function updatePhotoStage() {
       const p = currentVilla();
-      const d = detailsOf(p);
-      const photos = d.photos || [];
-      const strip = document.getElementById("villa-strip");
-      strip.innerHTML = pricedProperties.map((item, i) => {
-        const shot = (detailsOf(item).photos || [])[0];
-        const src = shot ? shot.src : "";
-        return `
-          <button type="button" class="villa-thumb" role="tab" id="villa-tab-${i}" aria-selected="${i === selectedVilla ? "true" : "false"}" aria-pressed="${i === selectedVilla ? "true" : "false"}" aria-controls="gallery-stage" data-villa="${i}">
-            ${src ? `<img src="${esc(src)}" alt="" loading="lazy" width="200" height="130">` : ""}
-            <span>${esc(item.name)}</span>
-          </button>
-        `;
-      }).join("");
-      strip.querySelectorAll(".villa-thumb").forEach((btn) => {
-        btn.addEventListener("click", () => selectVilla(Number(btn.dataset.villa), 0));
-      });
-      const activeThumb = strip.querySelector(".villa-thumb[aria-pressed='true']");
-      if (activeThumb && typeof activeThumb.scrollIntoView === "function") {
-        activeThumb.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
-      }
-
+      const photos = currentPhotos();
       const main = document.getElementById("gallery-main");
       const prev = document.getElementById("photo-prev");
       const next = document.getElementById("photo-next");
@@ -1875,14 +2079,23 @@
         next.hidden = true;
         count.textContent = "";
         photoStrip.innerHTML = "";
+        return;
+      }
+
+      const shot = photos[selectedPhoto];
+      main.src = shot.src;
+      main.alt = shot.alt || p.name;
+      main.loading = selectedPhoto === 0 ? "eager" : "lazy";
+      prev.hidden = photos.length < 2;
+      next.hidden = photos.length < 2;
+      count.textContent = photos.length > 1 ? `${selectedPhoto + 1} / ${photos.length}` : "";
+
+      const existing = photoStrip.querySelectorAll(".photo-thumb");
+      if (existing.length === photos.length) {
+        existing.forEach((btn, i) => {
+          btn.setAttribute("aria-pressed", i === selectedPhoto ? "true" : "false");
+        });
       } else {
-        const shot = photos[selectedPhoto];
-        main.src = shot.src;
-        main.alt = shot.alt || p.name;
-        main.loading = selectedPhoto === 0 ? "eager" : "lazy";
-        prev.hidden = photos.length < 2;
-        next.hidden = photos.length < 2;
-        count.textContent = photos.length > 1 ? `${selectedPhoto + 1} / ${photos.length}` : "";
         photoStrip.innerHTML = photos.map((photo, i) => `
           <button type="button" class="photo-thumb" aria-pressed="${i === selectedPhoto ? "true" : "false"}" aria-label="${esc(photo.alt || "Photo " + (i + 1))}" data-photo="${i}">
             <img src="${esc(photo.src)}" alt="" loading="lazy" width="120" height="80">
@@ -1891,11 +2104,43 @@
         photoStrip.querySelectorAll(".photo-thumb").forEach((btn) => {
           btn.addEventListener("click", () => selectVilla(selectedVilla, Number(btn.dataset.photo)));
         });
-        const active = photoStrip.querySelector(".photo-thumb[aria-pressed='true']");
-        if (active && typeof active.scrollIntoView === "function") {
-          active.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
-        }
       }
+      scrollStripHorizontally(photoStrip, photoStrip.querySelector(".photo-thumb[aria-pressed='true']"));
+    }
+
+    function renderGallery() {
+      const p = currentVilla();
+      const d = detailsOf(p);
+      const photos = d.photos || [];
+      const strip = document.getElementById("villa-strip");
+      strip.innerHTML = pricedProperties.map((item, i) => {
+        const shot = (detailsOf(item).photos || [])[0];
+        const src = shot ? shot.src : "";
+        return `
+          <button type="button" class="villa-thumb" role="tab" id="villa-tab-${i}" aria-selected="${i === selectedVilla ? "true" : "false"}" aria-pressed="${i === selectedVilla ? "true" : "false"}" aria-controls="gallery-stage" data-villa="${i}">
+            ${src ? `<img src="${esc(src)}" alt="" loading="lazy" width="200" height="130">` : ""}
+            <span class="villa-thumb-meta">
+              <span class="villa-thumb-name">${esc(item.name)}</span>
+              <span class="villa-thumb-price">${inr(item.total)}</span>
+            </span>
+          </button>
+        `;
+      }).join("");
+      strip.querySelectorAll(".villa-thumb").forEach((btn) => {
+        btn.addEventListener("click", () => selectVilla(Number(btn.dataset.villa), 0));
+      });
+      scrollStripHorizontally(strip, strip.querySelector(".villa-thumb[aria-pressed='true']"));
+
+      const photoStrip = document.getElementById("photo-strip");
+      photoStrip.innerHTML = photos.map((photo, i) => `
+        <button type="button" class="photo-thumb" aria-pressed="${i === selectedPhoto ? "true" : "false"}" aria-label="${esc(photo.alt || "Photo " + (i + 1))}" data-photo="${i}">
+          <img src="${esc(photo.src)}" alt="" loading="lazy" width="120" height="80">
+        </button>
+      `).join("");
+      photoStrip.querySelectorAll(".photo-thumb").forEach((btn) => {
+        btn.addEventListener("click", () => selectVilla(selectedVilla, Number(btn.dataset.photo)));
+      });
+      updatePhotoStage();
 
       const bathsLabel = p.baths === 1 ? "1 bathroom" : `${p.baths} bathrooms`;
       const bedLabel = p.bedrooms === 1 ? "1 bedroom" : `${p.bedrooms} bedrooms`;
@@ -1921,22 +2166,20 @@
         return `<div class="detail-block"><h4>${esc(title)}</h4><ul${ulClass}>${lis}</ul></div>`;
       }
 
-      const notInc = d.notIncluded && d.notIncluded.length
-        ? `<p class="not-included">Not included: ${esc(d.notIncluded.join(", "))}.</p>`
-        : "";
-
       document.getElementById("villa-details").innerHTML = `
-        <h3>${esc(p.name)}</h3>
-        <p class="villa-price">${inr(p.total)} <span class="muted">total · ${inr(p.rate)} per person-night</span></p>
-        <a class="villa-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">Open listing</a>
-        <div class="fact-row">${facts.map((f) => `<span class="fact">${esc(f)}</span>`).join("")}</div>
-        ${checkBits.length ? `<p class="note">${esc(checkBits.join(" · "))}.</p>` : ""}
-        ${listBlock("Sleeping arrangements", d.sleeping)}
-        ${listBlock("Also listed", d.highlights)}
-        ${listBlock("House rules", d.rules)}
-        ${listBlock("Amenities", d.amenities, "amenity-list")}
-        ${notInc}
-        ${listBlock("Good to know", d.notes)}
+        <div class="villa-info">
+          <h3>${esc(p.name)}</h3>
+          <p class="villa-price">${inr(p.total)} <span class="muted">· ${inr(p.rate)} per person-night</span></p>
+          <a class="villa-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">Open listing</a>
+          <div class="fact-row">${facts.map((f) => `<span class="fact">${esc(f)}</span>`).join("")}</div>
+          ${checkBits.length ? `<p class="note">${esc(checkBits.join(" · "))}.</p>` : ""}
+          ${listBlock("Sleeping arrangements", d.sleeping)}
+          ${listBlock("House rules", d.rules)}
+          ${listBlock("Good to know", d.notes)}
+        </div>
+        <div class="villa-pays" aria-labelledby="villa-pays-heading">
+          ${paysMarkup(selectedVilla)}
+        </div>
       `;
     }
 
@@ -2089,71 +2332,70 @@
       `).join("");
     }
 
-    function renderSelect() {
-      const select = document.getElementById("property-select");
-      select.innerHTML = pricedProperties.map((p, i) =>
-        `<option value="${i}">${p.name} · ${inr(p.total)}</option>`
-      ).join("");
-      select.addEventListener("change", () => renderPays(Number(select.value)));
-      renderPays(0);
-    }
-
-    function renderPays(index) {
-
+    function paysMarkup(index) {
       const p = pricedProperties[index];
-      const warn = document.getElementById("sleeps-warn");
-      if (PEAK_GUESTS > p.sleeps) {
-        warn.dataset.show = "true";
-        warn.textContent = `This villa sleeps ${p.sleeps}, but ${PEAK_GUESTS} people are staying on ${formatDayLong(busiest.day)}.`;
-      } else {
-        warn.dataset.show = "false";
-        warn.textContent = "";
-      }
-
-      document.getElementById("rate-chip").textContent =
-        `${inr(p.rate)} per person-night · ${personNights} person-nights`;
-
       const rows = guests.map((g) => {
         const covered = coveredNights(g);
         const amount = Math.round(covered * p.rate);
         return { g, covered, amount };
       });
+      const totalRounded = rows.reduce((sum, r) => sum + r.amount, 0);
+      const drift = totalRounded - p.total;
+      const driftNote = drift === 0
+        ? ""
+        : ` Rounded shares come to ${inr(totalRounded)}, ${inr(Math.abs(drift))} ${drift > 0 ? "over" : "under"} the listing, because amounts are rounded to the nearest rupee.`;
 
-      const body = document.querySelector("#pays-table tbody");
-      body.innerHTML = rows.map(({ g, covered, amount }) => `
+      const uncoveredPeople = guests.filter((g) => nightsOf(g) > coveredNights(g));
+      let note = "";
+      if (uncoveredPeople.length) {
+        const bits = uncoveredPeople.map((g) => {
+          const missed = nightsOf(g) - coveredNights(g);
+          return `${g.name}'s night of ${formatDay(g.leave - missed)} is not covered by the 19–27 Dec booking, so ${g.name.split(" ")[0]} is charged for ${coveredNights(g)} ${coveredNights(g) === 1 ? "night" : "nights"}, not ${nightsOf(g)}`;
+        });
+        note = bits.join(". ") + "." + driftNote;
+      } else {
+        note = driftNote.trim();
+      }
+
+      const warn = PEAK_GUESTS > p.sleeps
+        ? `<div class="warn" data-show="true" role="status">This villa sleeps ${p.sleeps}, but ${PEAK_GUESTS} people are staying on ${formatDayLong(busiest.day)}.</div>`
+        : "";
+
+      const body = rows.map(({ g, covered, amount }) => `
         <tr>
           <td class="name-cell">
-            <span class="pip" style="background:${g.color}; display:inline-block; margin-right:0.45rem; vertical-align:middle"></span>${g.name}
+            <span class="pip" style="background:${g.color}; display:inline-block; margin-right:0.45rem; vertical-align:middle"></span>${esc(g.name)}
           </td>
           <td class="num">${covered}</td>
           <td class="num">${inr(amount)}</td>
         </tr>
       `).join("");
 
-      const totalRounded = rows.reduce((sum, r) => sum + r.amount, 0);
-      const drift = totalRounded - p.total;
-      document.querySelector("#pays-table tfoot").innerHTML = `
-        <tr>
-          <td>Total</td>
-          <td class="num">${personNights}</td>
-          <td class="num">${inr(p.total)}</td>
-        </tr>
+      return `
+        <h3 id="villa-pays-heading">What each person pays</h3>
+        <p class="rate-chip">${inr(p.rate)} per person-night · ${personNights} person-nights</p>
+        ${warn}
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th class="num">Covered nights</th>
+                <th class="num">Amount</th>
+              </tr>
+            </thead>
+            <tbody>${body}</tbody>
+            <tfoot>
+              <tr>
+                <td>Total</td>
+                <td class="num">${personNights}</td>
+                <td class="num">${inr(p.total)}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        ${note ? `<p class="note">${esc(note)}</p>` : ""}
       `;
-      const driftNote = drift === 0
-        ? ""
-        : ` Rounded shares come to ${inr(totalRounded)}, ${inr(Math.abs(drift))} ${drift > 0 ? "over" : "under"} the listing, because amounts are rounded to the nearest rupee.`
-
-      const uncoveredPeople = guests.filter((g) => nightsOf(g) > coveredNights(g));
-      const note = document.getElementById("uncovered-note");
-      if (uncoveredPeople.length) {
-        const bits = uncoveredPeople.map((g) => {
-          const missed = nightsOf(g) - coveredNights(g);
-          return `${g.name}'s night of ${formatDay(g.leave - missed)} is not covered by the 19–27 Dec booking, so ${g.name.split(" ")[0]} is charged for ${coveredNights(g)} ${coveredNights(g) === 1 ? "night" : "nights"}, not ${nightsOf(g)}`;
-        });
-        note.textContent = bits.join(". ") + "." + driftNote;
-      } else {
-        note.textContent = driftNote.trim();
-      }
     }
 
     renderStats();
@@ -2161,7 +2403,6 @@
     renderStays();
     renderChart();
     renderProperties();
-    renderSelect();
     renderGallery();
   </script>
 </body>
