@@ -367,7 +367,7 @@
     td { font-size: 0.95rem; }
     #stays-table td, #stays-table th,
     #props-table td, #props-table th,
-    #pays-table td, #pays-table th { white-space: nowrap; }
+    .villa-pays td, .villa-pays th { white-space: nowrap; }
     #props-table { min-width: 52rem; }
     td.num, th.num { text-align: right; }
     tr:last-child td { border-bottom: 0; }
@@ -739,10 +739,57 @@
     }
 
     .villa-details {
-      padding: 1.15rem 1.15rem 1.35rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+      gap: 0;
+      align-items: start;
+      border-top: 0;
     }
 
-    .villa-details h3 {
+    .villa-info {
+      padding: 1.15rem 1.15rem 1.35rem;
+      border-right: 1px solid var(--line);
+      min-width: 0;
+    }
+
+    .villa-pays {
+      padding: 1.15rem 1.15rem 1.35rem;
+      background: var(--surface-2);
+      min-width: 0;
+    }
+
+    .villa-pays h3 {
+      margin: 0 0 0.35rem;
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .villa-pays .rate-chip {
+      margin: 0 0 0.75rem;
+    }
+
+    .villa-pays .warn {
+      margin-bottom: 0.75rem;
+    }
+
+    .villa-pays .scroll {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      overflow-x: auto;
+    }
+
+    .villa-pays table {
+      min-width: 16rem;
+    }
+
+    .villa-pays .note {
+      margin-top: 0.75rem;
+    }
+
+    .villa-details .villa-info h3 {
       margin: 0;
       font-family: var(--font-serif);
       font-size: 1.35rem;
@@ -809,15 +856,23 @@
       font-size: 0.92rem;
     }
 
+    @media (max-width: 900px) {
+      .villa-details { grid-template-columns: 1fr; }
+      .villa-info {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
     @media (max-width: 700px) {
       .wrap { padding: 1.4rem 0.9rem 3rem; }
       .stats { grid-template-columns: 1fr; }
       th, td { padding: 0.6rem 0.7rem; }
-      #pays-table th, #pays-table td { padding: 0.6rem 0.55rem; }
+      .villa-pays th, .villa-pays td { padding: 0.6rem 0.55rem; }
       .gantt { --name-col: 8rem; }
       .gallery-stage img { height: min(62vw, 22rem); }
       .villa-thumb { width: 8.6rem; }
-      .villa-details { padding: 1rem 0.9rem 1.2rem; }
+      .villa-info, .villa-pays { padding: 1rem 0.9rem 1.2rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -888,33 +943,6 @@
           <div class="who" id="who"></div>
         </div>
       </div>
-    </section>
-
-    <section aria-labelledby="pays-heading">
-      <h2 id="pays-heading">What each person pays</h2>
-      <p class="lede">The total is split by covered nights. Everyone pays the same rate for each night they stay inside the 19–27 Dec booking.</p>
-      <div class="toolbar">
-        <label class="field">
-          Property
-          <select id="property-select"></select>
-        </label>
-        <p class="rate-chip" id="rate-chip"></p>
-      </div>
-      <div class="warn" id="sleeps-warn" role="status"></div>
-      <div class="panel scroll">
-        <table id="pays-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th class="num">Covered nights</th>
-              <th class="num">Amount</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-          <tfoot></tfoot>
-        </table>
-      </div>
-      <p class="note" id="uncovered-note"></p>
     </section>
 
     <section aria-labelledby="props-heading">
@@ -1913,14 +1941,19 @@
       }
 
       document.getElementById("villa-details").innerHTML = `
-        <h3>${esc(p.name)}</h3>
-        <p class="villa-price">${inr(p.total)} <span class="muted">total · ${inr(p.rate)} per person-night</span></p>
-        <a class="villa-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">Open listing</a>
-        <div class="fact-row">${facts.map((f) => `<span class="fact">${esc(f)}</span>`).join("")}</div>
-        ${checkBits.length ? `<p class="note">${esc(checkBits.join(" · "))}.</p>` : ""}
-        ${listBlock("Sleeping arrangements", d.sleeping)}
-        ${listBlock("House rules", d.rules)}
-        ${listBlock("Good to know", d.notes)}
+        <div class="villa-info">
+          <h3>${esc(p.name)}</h3>
+          <p class="villa-price">${inr(p.total)} <span class="muted">total · ${inr(p.rate)} per person-night</span></p>
+          <a class="villa-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">Open listing</a>
+          <div class="fact-row">${facts.map((f) => `<span class="fact">${esc(f)}</span>`).join("")}</div>
+          ${checkBits.length ? `<p class="note">${esc(checkBits.join(" · "))}.</p>` : ""}
+          ${listBlock("Sleeping arrangements", d.sleeping)}
+          ${listBlock("House rules", d.rules)}
+          ${listBlock("Good to know", d.notes)}
+        </div>
+        <div class="villa-pays" aria-labelledby="villa-pays-heading">
+          ${paysMarkup(selectedVilla)}
+        </div>
       `;
     }
 
@@ -2073,71 +2106,70 @@
       `).join("");
     }
 
-    function renderSelect() {
-      const select = document.getElementById("property-select");
-      select.innerHTML = pricedProperties.map((p, i) =>
-        `<option value="${i}">${p.name} · ${inr(p.total)}</option>`
-      ).join("");
-      select.addEventListener("change", () => renderPays(Number(select.value)));
-      renderPays(0);
-    }
-
-    function renderPays(index) {
-
+    function paysMarkup(index) {
       const p = pricedProperties[index];
-      const warn = document.getElementById("sleeps-warn");
-      if (PEAK_GUESTS > p.sleeps) {
-        warn.dataset.show = "true";
-        warn.textContent = `This villa sleeps ${p.sleeps}, but ${PEAK_GUESTS} people are staying on ${formatDayLong(busiest.day)}.`;
-      } else {
-        warn.dataset.show = "false";
-        warn.textContent = "";
-      }
-
-      document.getElementById("rate-chip").textContent =
-        `${inr(p.rate)} per person-night · ${personNights} person-nights`;
-
       const rows = guests.map((g) => {
         const covered = coveredNights(g);
         const amount = Math.round(covered * p.rate);
         return { g, covered, amount };
       });
+      const totalRounded = rows.reduce((sum, r) => sum + r.amount, 0);
+      const drift = totalRounded - p.total;
+      const driftNote = drift === 0
+        ? ""
+        : ` Rounded shares come to ${inr(totalRounded)}, ${inr(Math.abs(drift))} ${drift > 0 ? "over" : "under"} the listing, because amounts are rounded to the nearest rupee.`;
 
-      const body = document.querySelector("#pays-table tbody");
-      body.innerHTML = rows.map(({ g, covered, amount }) => `
+      const uncoveredPeople = guests.filter((g) => nightsOf(g) > coveredNights(g));
+      let note = "";
+      if (uncoveredPeople.length) {
+        const bits = uncoveredPeople.map((g) => {
+          const missed = nightsOf(g) - coveredNights(g);
+          return `${g.name}'s night of ${formatDay(g.leave - missed)} is not covered by the 19–27 Dec booking, so ${g.name.split(" ")[0]} is charged for ${coveredNights(g)} ${coveredNights(g) === 1 ? "night" : "nights"}, not ${nightsOf(g)}`;
+        });
+        note = bits.join(". ") + "." + driftNote;
+      } else {
+        note = driftNote.trim();
+      }
+
+      const warn = PEAK_GUESTS > p.sleeps
+        ? `<div class="warn" data-show="true" role="status">This villa sleeps ${p.sleeps}, but ${PEAK_GUESTS} people are staying on ${formatDayLong(busiest.day)}.</div>`
+        : "";
+
+      const body = rows.map(({ g, covered, amount }) => `
         <tr>
           <td class="name-cell">
-            <span class="pip" style="background:${g.color}; display:inline-block; margin-right:0.45rem; vertical-align:middle"></span>${g.name}
+            <span class="pip" style="background:${g.color}; display:inline-block; margin-right:0.45rem; vertical-align:middle"></span>${esc(g.name)}
           </td>
           <td class="num">${covered}</td>
           <td class="num">${inr(amount)}</td>
         </tr>
       `).join("");
 
-      const totalRounded = rows.reduce((sum, r) => sum + r.amount, 0);
-      const drift = totalRounded - p.total;
-      document.querySelector("#pays-table tfoot").innerHTML = `
-        <tr>
-          <td>Total</td>
-          <td class="num">${personNights}</td>
-          <td class="num">${inr(p.total)}</td>
-        </tr>
+      return `
+        <h3 id="villa-pays-heading">What each person pays</h3>
+        <p class="rate-chip">${inr(p.rate)} per person-night · ${personNights} person-nights</p>
+        ${warn}
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th class="num">Covered nights</th>
+                <th class="num">Amount</th>
+              </tr>
+            </thead>
+            <tbody>${body}</tbody>
+            <tfoot>
+              <tr>
+                <td>Total</td>
+                <td class="num">${personNights}</td>
+                <td class="num">${inr(p.total)}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        ${note ? `<p class="note">${esc(note)}</p>` : ""}
       `;
-      const driftNote = drift === 0
-        ? ""
-        : ` Rounded shares come to ${inr(totalRounded)}, ${inr(Math.abs(drift))} ${drift > 0 ? "over" : "under"} the listing, because amounts are rounded to the nearest rupee.`
-
-      const uncoveredPeople = guests.filter((g) => nightsOf(g) > coveredNights(g));
-      const note = document.getElementById("uncovered-note");
-      if (uncoveredPeople.length) {
-        const bits = uncoveredPeople.map((g) => {
-          const missed = nightsOf(g) - coveredNights(g);
-          return `${g.name}'s night of ${formatDay(g.leave - missed)} is not covered by the 19–27 Dec booking, so ${g.name.split(" ")[0]} is charged for ${coveredNights(g)} ${coveredNights(g) === 1 ? "night" : "nights"}, not ${nightsOf(g)}`;
-        });
-        note.textContent = bits.join(". ") + "." + driftNote;
-      } else {
-        note.textContent = driftNote.trim();
-      }
     }
 
     renderStats();
@@ -2145,7 +2177,6 @@
     renderStays();
     renderChart();
     renderProperties();
-    renderSelect();
     renderGallery();
   </script>
 </body>
