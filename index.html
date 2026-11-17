@@ -1832,6 +1832,18 @@
     let selectedVilla = 0;
     let selectedPhoto = 0;
 
+    function scrollStripHorizontally(strip, active) {
+      if (!strip || !active) return;
+      const pad = 12;
+      const left = active.offsetLeft;
+      const right = left + active.offsetWidth;
+      if (left < strip.scrollLeft + pad) {
+        strip.scrollTo({ left: Math.max(0, left - pad), behavior: "smooth" });
+      } else if (right > strip.scrollLeft + strip.clientWidth - pad) {
+        strip.scrollTo({ left: right - strip.clientWidth + pad, behavior: "smooth" });
+      }
+    }
+
     function currentVilla() {
       return pricedProperties[selectedVilla];
     }
@@ -1841,18 +1853,65 @@
     }
 
     function selectVilla(index, photoIndex) {
+      const villaChanged = index !== selectedVilla;
       selectedVilla = index;
       selectedPhoto = photoIndex == null ? 0 : photoIndex;
       const photos = currentPhotos();
       if (selectedPhoto < 0) selectedPhoto = Math.max(photos.length - 1, 0);
       if (selectedPhoto >= photos.length) selectedPhoto = 0;
-      renderGallery();
+      if (villaChanged) renderGallery();
+      else updatePhotoStage();
     }
 
     function stepPhoto(delta) {
       const photos = currentPhotos();
       if (!photos.length) return;
       selectVilla(selectedVilla, (selectedPhoto + delta + photos.length) % photos.length);
+    }
+
+    function updatePhotoStage() {
+      const p = currentVilla();
+      const photos = currentPhotos();
+      const main = document.getElementById("gallery-main");
+      const prev = document.getElementById("photo-prev");
+      const next = document.getElementById("photo-next");
+      const count = document.getElementById("photo-count");
+      const photoStrip = document.getElementById("photo-strip");
+
+      if (!photos.length) {
+        main.removeAttribute("src");
+        main.alt = "No listing photos found for this villa";
+        prev.hidden = true;
+        next.hidden = true;
+        count.textContent = "";
+        photoStrip.innerHTML = "";
+        return;
+      }
+
+      const shot = photos[selectedPhoto];
+      main.src = shot.src;
+      main.alt = shot.alt || p.name;
+      main.loading = selectedPhoto === 0 ? "eager" : "lazy";
+      prev.hidden = photos.length < 2;
+      next.hidden = photos.length < 2;
+      count.textContent = photos.length > 1 ? `${selectedPhoto + 1} / ${photos.length}` : "";
+
+      const existing = photoStrip.querySelectorAll(".photo-thumb");
+      if (existing.length === photos.length) {
+        existing.forEach((btn, i) => {
+          btn.setAttribute("aria-pressed", i === selectedPhoto ? "true" : "false");
+        });
+      } else {
+        photoStrip.innerHTML = photos.map((photo, i) => `
+          <button type="button" class="photo-thumb" aria-pressed="${i === selectedPhoto ? "true" : "false"}" aria-label="${esc(photo.alt || "Photo " + (i + 1))}" data-photo="${i}">
+            <img src="${esc(photo.src)}" alt="" loading="lazy" width="120" height="80">
+          </button>
+        `).join("");
+        photoStrip.querySelectorAll(".photo-thumb").forEach((btn) => {
+          btn.addEventListener("click", () => selectVilla(selectedVilla, Number(btn.dataset.photo)));
+        });
+      }
+      scrollStripHorizontally(photoStrip, photoStrip.querySelector(".photo-thumb[aria-pressed='true']"));
     }
 
     function renderGallery() {
@@ -1876,45 +1935,18 @@
       strip.querySelectorAll(".villa-thumb").forEach((btn) => {
         btn.addEventListener("click", () => selectVilla(Number(btn.dataset.villa), 0));
       });
-      const activeThumb = strip.querySelector(".villa-thumb[aria-pressed='true']");
-      if (activeThumb && typeof activeThumb.scrollIntoView === "function") {
-        activeThumb.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
-      }
+      scrollStripHorizontally(strip, strip.querySelector(".villa-thumb[aria-pressed='true']"));
 
-      const main = document.getElementById("gallery-main");
-      const prev = document.getElementById("photo-prev");
-      const next = document.getElementById("photo-next");
-      const count = document.getElementById("photo-count");
       const photoStrip = document.getElementById("photo-strip");
-
-      if (!photos.length) {
-        main.removeAttribute("src");
-        main.alt = "No listing photos found for this villa";
-        prev.hidden = true;
-        next.hidden = true;
-        count.textContent = "";
-        photoStrip.innerHTML = "";
-      } else {
-        const shot = photos[selectedPhoto];
-        main.src = shot.src;
-        main.alt = shot.alt || p.name;
-        main.loading = selectedPhoto === 0 ? "eager" : "lazy";
-        prev.hidden = photos.length < 2;
-        next.hidden = photos.length < 2;
-        count.textContent = photos.length > 1 ? `${selectedPhoto + 1} / ${photos.length}` : "";
-        photoStrip.innerHTML = photos.map((photo, i) => `
-          <button type="button" class="photo-thumb" aria-pressed="${i === selectedPhoto ? "true" : "false"}" aria-label="${esc(photo.alt || "Photo " + (i + 1))}" data-photo="${i}">
-            <img src="${esc(photo.src)}" alt="" loading="lazy" width="120" height="80">
-          </button>
-        `).join("");
-        photoStrip.querySelectorAll(".photo-thumb").forEach((btn) => {
-          btn.addEventListener("click", () => selectVilla(selectedVilla, Number(btn.dataset.photo)));
-        });
-        const active = photoStrip.querySelector(".photo-thumb[aria-pressed='true']");
-        if (active && typeof active.scrollIntoView === "function") {
-          active.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
-        }
-      }
+      photoStrip.innerHTML = photos.map((photo, i) => `
+        <button type="button" class="photo-thumb" aria-pressed="${i === selectedPhoto ? "true" : "false"}" aria-label="${esc(photo.alt || "Photo " + (i + 1))}" data-photo="${i}">
+          <img src="${esc(photo.src)}" alt="" loading="lazy" width="120" height="80">
+        </button>
+      `).join("");
+      photoStrip.querySelectorAll(".photo-thumb").forEach((btn) => {
+        btn.addEventListener("click", () => selectVilla(selectedVilla, Number(btn.dataset.photo)));
+      });
+      updatePhotoStage();
 
       const bathsLabel = p.baths === 1 ? "1 bathroom" : `${p.baths} bathrooms`;
       const bedLabel = p.bedrooms === 1 ? "1 bedroom" : `${p.bedrooms} bedrooms`;
