@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>Goa trip · 19–28 Dec 2026</title>
+  <title>Goa trip · 19–27 Dec 2026</title>
   <style>
     :root {
       --bg: #f3efe8;
@@ -181,7 +181,7 @@
     /* Timeline */
     .gantt {
       --name-col: 8.8rem;
-      --cols: 10;
+      --cols: 9;
       min-width: 40rem;
     }
 
@@ -389,7 +389,7 @@
 
     .chart-bars {
       display: grid;
-      grid-template-columns: repeat(10, minmax(0, 1fr));
+      grid-template-columns: repeat(9, minmax(0, 1fr));
       gap: 0.4rem;
       align-items: end;
       height: 11.5rem;
@@ -746,6 +746,18 @@
       border-top: 0;
     }
 
+    .villa-details.pays-hidden {
+      grid-template-columns: 1fr;
+    }
+
+    .villa-details.pays-hidden .villa-info {
+      border-right: 0;
+    }
+
+    .villa-details.pays-hidden .villa-pays {
+      display: none;
+    }
+
     .villa-info {
       padding: 1.15rem 1.15rem 1.35rem;
       border-right: 1px solid var(--line);
@@ -754,7 +766,7 @@
 
     .villa-pays {
       padding: 1.15rem 1.15rem 1.35rem;
-      background: var(--surface-2);
+      background: var(--surface);
       min-width: 0;
     }
 
@@ -862,6 +874,7 @@
         border-right: 0;
         border-bottom: 1px solid var(--line);
       }
+      .villa-details.pays-hidden .villa-info { border-bottom: 0; }
     }
 
     @media (max-width: 700px) {
@@ -885,7 +898,7 @@
     <header class="hero">
       <p class="kicker">Group trip</p>
       <h1>Goa trip</h1>
-      <p class="subtitle">19–28 Dec 2026</p>
+      <p class="subtitle">19–27 Dec 2026</p>
       <div class="stats" id="stats"></div>
     </header>
 
@@ -901,19 +914,18 @@
           <p class="photo-count" id="photo-count"></p>
         </div>
         <div class="photo-strip" id="photo-strip"></div>
-        <div class="villa-details" id="villa-details"></div>
+        <div class="villa-details pays-hidden" id="villa-details"></div>
       </div>
     </section>
 
     <section aria-labelledby="timeline-heading">
       <h2 id="timeline-heading">Who is there when</h2>
-      <p class="lede">A coloured bar marks each night someone is in Goa. Villa bookings cover 19–27 Dec, so the night of the 27th is not included in the split.</p>
+      <p class="lede">A coloured bar marks each night someone is in Goa. Everyone leaves by 27 Dec, the villa checkout.</p>
       <div class="panel scroll">
         <div class="gantt" id="gantt"></div>
       </div>
       <p class="legend">
         <span><i class="swatch peak-swatch"></i> Busiest night · Fri 25 Dec</span>
-        <span><i class="swatch hatch"></i> Night of 27 Dec · not covered by the villa booking</span>
       </p>
     </section>
 
@@ -976,7 +988,7 @@
     const YEAR = 2026;
     const MONTH = 11; // December
     const DAY_START = 19;
-    const DAY_END = 28;
+    const DAY_END = 27;
     const BOOKING = { arrive: 19, leave: 27 };
     const PEAK_GUESTS = 8;
     const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -996,7 +1008,7 @@
       { name: "Mansi", arrive: 22, leave: 26 },
       { name: "Vaish", arrive: 23, leave: 27 },
       { name: "Prutha", arrive: 24, leave: 27 },
-      { name: "Shubham", arrive: 25, leave: 28 }
+      { name: "Shubham", arrive: 25, leave: 27 }
     ].map((g, i) => ({ ...g, color: PALETTE[i] }));
 
     const properties = [
@@ -2181,6 +2193,9 @@
           ${paysMarkup(selectedVilla)}
         </div>
       `;
+      const detailsEl = document.getElementById("villa-details");
+      const paysEl = detailsEl.querySelector(".villa-pays");
+      if (paysEl) paysEl.hidden = detailsEl.classList.contains("pays-hidden");
     }
 
     document.getElementById("photo-prev").addEventListener("click", () => stepPhoto(-1));
@@ -2190,6 +2205,17 @@
       if (event.key === "ArrowRight") { event.preventDefault(); stepPhoto(1); }
     });
     document.getElementById("gallery-stage").setAttribute("tabindex", "0");
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "p" && event.key !== "P") return;
+      if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+      const tag = event.target && event.target.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      const details = document.getElementById("villa-details");
+      details.classList.toggle("pays-hidden");
+      const pays = details.querySelector(".villa-pays");
+      if (pays) pays.hidden = details.classList.contains("pays-hidden");
+    });
 
     function renderStats() {
       document.getElementById("stats").innerHTML = `
@@ -2205,7 +2231,7 @@
         </div>
         <div class="stat">
           <span class="label">Dates</span>
-          <span class="value">19–28 Dec</span>
+          <span class="value">19–27 Dec</span>
           <span class="hint">First arrival to last departure</span>
         </div>
       `;
@@ -2363,9 +2389,7 @@
 
       const body = rows.map(({ g, covered, amount }) => `
         <tr>
-          <td class="name-cell">
-            <span class="pip" style="background:${g.color}; display:inline-block; margin-right:0.45rem; vertical-align:middle"></span>${esc(g.name)}
-          </td>
+          <td class="name-cell">${esc(g.name)}</td>
           <td class="num">${covered}</td>
           <td class="num">${inr(amount)}</td>
         </tr>
