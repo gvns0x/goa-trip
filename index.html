@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Goa trip · 19–28 Dec 2026</title>
+  <style>
+    :root {
+      --bg: #f3efe8;
+      --bg-warm: #ebe4d8;
+      --surface: #fffcf7;
+      --surface-2: #f7f1e8;
+      --ink: #1a1612;
+      --ink-soft: #5c564e;
+      --line: #e0d7cb;
+      --line-strong: #c9bdaf;
+      --accent: #b44a1f;
+      --accent-soft: rgba(180, 74, 31, 0.12);
+      --sea: #1f6f6a;
+      --sea-soft: rgba(31, 111, 106, 0.12);
+      --warn-bg: #fbece7;
+      --warn-ink: #8a2e16;
+      --warn-line: #e8c2b4;
+      --hatch: rgba(180, 74, 31, 0.08);
+      --shadow: 0 1px 2px rgba(26, 22, 18, 0.04), 0 8px 24px rgba(26, 22, 18, 0.05);
+      --font-sans: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+      --radius: 14px;
+      --radius-sm: 8px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #14110f;
+        --bg-warm: #1c1815;
+        --surface: #1e1a17;
+        --surface-2: #26211c;
+        --ink: #f3ece4;
+        --ink-soft: #b0a79c;
+        --line: #3a332c;
+        --line-strong: #52483e;
+        --accent: #e07a4c;
+        --accent-soft: rgba(224, 122, 76, 0.16);
+        --sea: #6ec4be;
+        --sea-soft: rgba(110, 196, 190, 0.14);
+        --warn-bg: #3a1f18;
+        --warn-ink: #f0b0a0;
+        --warn-line: #6a3a2e;
+        --hatch: rgba(224, 122, 76, 0.1);
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { color-scheme: light dark; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: var(--accent);
+      text-underline-offset: 0.18em;
+    }
+    a:hover { text-decoration-thickness: 2px; }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2.25rem 1.25rem 4rem;
+    }
+
+    header.hero {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kicker {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      font-weight: 650;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: clamp(2.35rem, 6vw, 3.6rem);
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      margin: 0.55rem 0 0;
+      font-size: 1.15rem;
+      color: var(--ink-soft);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.75rem;
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem 1.05rem;
+      box-shadow: var(--shadow);
+    }
+
+    .stat .label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .stat .value {
+      display: block;
+      margin-top: 0.25rem;
+      font-family: var(--font-serif);
+      font-size: clamp(1.15rem, 3vw, 1.55rem);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .stat .hint {
+      display: block;
+      margin-top: 0.2rem;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+    }
+
+    section {
+      margin: 0 0 2.75rem;
+    }
+
+    h2 {
+      margin: 0 0 0.85rem;
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .lede {
+      margin: -0.25rem 0 1rem;
+      color: var(--ink-soft);
+      max-width: 42rem;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Timeline */
+    .gantt {
+      --name-col: 8.8rem;
+      --cols: 10;
+      min-width: 40rem;
+    }
+
+    .gantt-head,
+    .gantt-row {
+      display: grid;
+      grid-template-columns: var(--name-col) repeat(var(--cols), minmax(2.55rem, 1fr));
+      align-items: stretch;
+    }
+
+    .gantt-head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .gantt-name {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.75rem;
+      background: var(--surface);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-right: 1px solid var(--line);
+    }
+
+    .gantt-head .gantt-name {
+      font-size: 0.7rem;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .gantt-row {
+      border-top: 1px solid var(--line);
+      position: relative;
+    }
+
+    .gantt-row:first-of-type { border-top: 0; }
+
+    .pip {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 99px;
+      background: var(--person);
+      flex: 0 0 auto;
+    }
+
+    .day-h {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 0.15rem;
+      text-align: center;
+      border-left: 1px solid transparent;
+    }
+
+    .day-h .dow {
+      font-size: 0.65rem;
+      font-weight: 650;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .day-h .num {
+      font-variant-numeric: tabular-nums;
+      font-size: 0.92rem;
+      font-weight: 620;
+    }
+
+    .day-h.weekend { background: var(--bg-warm); }
+    .day-h.peak {
+      background: var(--accent-soft);
+    }
+    .day-h.uncovered {
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 4px,
+        var(--hatch) 4px,
+        var(--hatch) 8px
+      );
+    }
+
+    .gantt-track {
+      position: relative;
+      display: grid;
+      grid-column: 2 / -1;
+      grid-template-columns: repeat(var(--cols), minmax(2.55rem, 1fr));
+      min-height: 2.7rem;
+    }
+
+    .gantt-cell {
+      border-left: 1px solid var(--line);
+    }
+
+    .gantt-cell.weekend { background: var(--bg-warm); }
+    .gantt-cell.peak { background: var(--accent-soft); }
+    .gantt-cell.uncovered {
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 4px,
+        var(--hatch) 4px,
+        var(--hatch) 8px
+      );
+    }
+
+    .gantt-head .gantt-name { z-index: 3; }
+
+    .bar {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 1.15rem;
+      border-radius: 999px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      margin-top: 0.85rem;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+    }
+
+    .legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .swatch {
+      width: 0.85rem;
+      height: 0.55rem;
+      border-radius: 99px;
+      background: currentColor;
+    }
+    .swatch.hatch {
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--line-strong),
+        var(--line-strong) 2px,
+        transparent 2px,
+        transparent 5px
+      );
+      border: 1px solid var(--line-strong);
+      color: transparent;
+    }
+    .swatch.peak-swatch { background: var(--accent-soft); border: 1px solid var(--accent); }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+
+    th, td {
+      padding: 0.7rem 0.85rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      font-size: 0.7rem;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      background: var(--surface-2);
+      white-space: nowrap;
+    }
+
+    td { font-size: 0.95rem; }
+    #stays-table td, #stays-table th,
+    #props-table td, #props-table th,
+    #pays-table td, #pays-table th { white-space: nowrap; }
+    #props-table { min-width: 52rem; }
+    td.num, th.num { text-align: right; }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:hover td { background: var(--bg-warm); }
+
+    .name-cell { font-weight: 600; white-space: nowrap; }
+    .muted { color: var(--ink-soft); }
+    .sub {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--ink-soft);
+    }
+
+    /* Occupancy chart */
+    .chart {
+      padding: 1.15rem 1rem 1rem;
+    }
+
+    .chart-bars {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: 0.4rem;
+      align-items: end;
+      height: 11.5rem;
+    }
+
+    .night {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+    }
+
+    .col-wrap {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.3rem;
+      min-height: 0;
+      width: 100%;
+    }
+
+    .night:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .col {
+      width: 100%;
+      max-width: 2.6rem;
+      flex: 0 0 auto;
+      border-radius: 6px 6px 2px 2px;
+      background: var(--sea);
+      opacity: 0.78;
+      min-height: 2px;
+      transition: opacity 0.15s ease;
+    }
+
+    .night:hover .col,
+    .night[aria-pressed="true"] .col {
+      opacity: 1;
+    }
+
+    .night.peak .col { background: var(--accent); opacity: 0.9; }
+    .night.uncovered .col { background: var(--ink-soft); opacity: 0.55; }
+    .night.empty .col { background: var(--line-strong); opacity: 0.4; min-height: 3px; }
+
+    .count {
+      font-variant-numeric: tabular-nums;
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .night-label {
+      flex: 0 0 auto;
+      text-align: center;
+      line-height: 1.15;
+      padding-top: 0.35rem;
+    }
+
+    .night-label .n {
+      display: block;
+      font-variant-numeric: tabular-nums;
+      font-weight: 650;
+      font-size: 0.85rem;
+    }
+
+    .night-label .d {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .who {
+      margin-top: 1rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.92rem;
+    }
+
+    .who strong { font-weight: 650; }
+    .who-list { margin: 0.35rem 0 0; color: var(--ink-soft); }
+
+    /* Properties + pays */
+    .prop-name { font-weight: 650; }
+    .sleeps-tight { color: var(--warn-ink); font-weight: 650; }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 0.85rem;
+      margin-bottom: 0.9rem;
+    }
+
+    label.field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      font-size: 0.78rem;
+      font-weight: 650;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      min-width: min(100%, 22rem);
+      flex: 1;
+    }
+
+    select {
+      appearance: none;
+      width: 100%;
+      padding: 0.7rem 2.4rem 0.7rem 0.85rem;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-sm);
+      background: var(--surface) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%235c564e' d='M1 1l5 5 5-5'/></svg>") no-repeat right 0.85rem center;
+      color: var(--ink);
+      font: 600 1rem var(--font-sans);
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      select {
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23f3ece4' d='M1 1l5 5 5-5'/></svg>");
+      }
+    }
+
+    select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .rate-chip {
+      font-variant-numeric: tabular-nums;
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+    }
+
+    .warn {
+      display: none;
+      margin: 0 0 0.9rem;
+      padding: 0.8rem 1rem;
+      background: var(--warn-bg);
+      color: var(--warn-ink);
+      border: 1px solid var(--warn-line);
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+    }
+
+    .warn[data-show="true"] { display: block; }
+
+    .note {
+      margin: 0.85rem 0 0;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+    }
+
+    tfoot td {
+      border-top: 1px solid var(--line-strong);
+      border-bottom: 0;
+      font-weight: 700;
+      background: var(--surface-2);
+    }
+
+    footer.page-foot {
+      margin-top: 1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 700px) {
+      .wrap { padding: 1.4rem 0.9rem 3rem; }
+      .stats { grid-template-columns: 1fr; }
+      th, td { padding: 0.6rem 0.7rem; }
+      #pays-table th, #pays-table td { padding: 0.6rem 0.55rem; }
+      .gantt { --name-col: 8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .col { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <p class="kicker">Group trip</p>
+      <h1>Goa trip</h1>
+      <p class="subtitle">19–28 Dec 2026</p>
+      <div class="stats" id="stats"></div>
+    </header>
+
+    <section aria-labelledby="timeline-heading">
+      <h2 id="timeline-heading">Who is there when</h2>
+      <p class="lede">A coloured bar marks each night someone is in Goa. Villa bookings cover 19–27 Dec, so the night of the 27th is not included in the split.</p>
+      <div class="panel scroll">
+        <div class="gantt" id="gantt"></div>
+      </div>
+      <p class="legend">
+        <span><i class="swatch peak-swatch"></i> Busiest night · Fri 25 Dec</span>
+        <span><i class="swatch hatch"></i> Night of 27 Dec · not covered by the villa booking</span>
+      </p>
+    </section>
+
+    <section aria-labelledby="stays-heading">
+      <h2 id="stays-heading">Stays</h2>
+      <div class="panel scroll">
+        <table id="stays-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Arrives</th>
+              <th>Leaves</th>
+              <th class="num">Nights</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="nights-heading">
+      <h2 id="nights-heading">People staying each night</h2>
+      <p class="lede">Tap a night to see who is there. A guest counts on a night if they arrive that day or earlier, and leave after it.</p>
+      <div class="panel">
+        <div class="chart">
+          <div class="chart-bars" id="chart" role="list"></div>
+          <div class="who" id="who"></div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="props-heading">
+      <h2 id="props-heading">Properties</h2>
+      <p class="lede">All quotes are for 19–27 Dec, 8 nights, 8 guests. Sorted from cheapest to most expensive.</p>
+      <div class="panel scroll">
+        <table id="props-table">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Area</th>
+              <th>Layout</th>
+              <th class="num">Sleeps</th>
+              <th class="num">Rating</th>
+              <th class="num">Total</th>
+              <th class="num">Per person-night</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="pays-heading">
+      <h2 id="pays-heading">What each person pays</h2>
+      <p class="lede">The total is split by covered nights. Everyone pays the same rate for each night they stay inside the 19–27 Dec booking.</p>
+      <div class="toolbar">
+        <label class="field">
+          Property
+          <select id="property-select"></select>
+        </label>
+        <p class="rate-chip" id="rate-chip"></p>
+      </div>
+      <div class="warn" id="sleeps-warn" role="status"></div>
+      <div class="panel scroll">
+        <table id="pays-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th class="num">Covered nights</th>
+              <th class="num">Amount</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+      <p class="note" id="uncovered-note"></p>
+    </section>
+
+    <footer class="page-foot">
+      Airbnb prices were converted from USD at ₹93.96/$ on 17 Nov 2026 and are approximate. Totals include fees as shown at the time.
+    </footer>
+  </div>
+
+  <script>
+    const USD_INR = 93.96;
+    const YEAR = 2026;
+    const MONTH = 11; // December
+    const DAY_START = 19;
+    const DAY_END = 28;
+    const BOOKING = { arrive: 19, leave: 27 };
+    const PEAK_GUESTS = 8;
+    const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const PALETTE = [
+      "#c45c26", "#1a7a75", "#3d5a80", "#7b4b94",
+      "#c4a035", "#c45c6a", "#2d8a62", "#d4724e",
+      "#4a7c9b", "#6d5a7c"
+    ];
+
+    const guests = [
+      { name: "João", arrive: 19, leave: 27 },
+      { name: "Varnika", arrive: 19, leave: 27 },
+      { name: "Rahul", arrive: 19, leave: 27 },
+      { name: "Rachita", arrive: 19, leave: 27 },
+      { name: "Simran Singh", arrive: 20, leave: 23 },
+      { name: "Roma", arrive: 20, leave: 23 },
+      { name: "Mansi", arrive: 22, leave: 26 },
+      { name: "Vaish", arrive: 23, leave: 27 },
+      { name: "Prutha", arrive: 24, leave: 27 },
+      { name: "Shubham", arrive: 25, leave: 28 }
+    ].map((g, i) => ({ ...g, color: PALETTE[i] }));
+
+    const properties = [
+      {
+        name: "La Zamora Estate Villa 04",
+        area: "Vagator",
+        source: "The Blue Kite",
+        totalInr: 446890,
+        sleeps: 7,
+        bedrooms: 3,
+        baths: 3,
+        pool: "private pool",
+        rating: 5.0,
+        reviews: 40,
+        url: "https://www.thebluekite.com/goa/vagator/villas/la-zamora-estate-villa-04"
+      },
+      {
+        name: "3BR Pvt Pool near Thalassa",
+        area: "Siolim",
+        source: "Airbnb",
+        totalUsd: 1674,
+        sleeps: 8,
+        bedrooms: 3,
+        baths: 4,
+        pool: "plunge pool",
+        rating: 5.0,
+        reviews: 4,
+        url: "https://www.airbnb.co.uk/rooms/1795012544737897511?check_in=2026-12-19&check_out=2026-12-27&adults=8"
+      },
+      {
+        name: "Evaya Zest 3BHK Villa",
+        area: "Assagao",
+        source: "Airbnb",
+        totalUsd: 1873,
+        sleeps: 8,
+        bedrooms: 3,
+        baths: 4,
+        pool: "plunge pool",
+        rating: 5.0,
+        reviews: 14,
+        url: "https://www.airbnb.co.uk/rooms/1726780161697151139?check_in=2026-12-19&check_out=2026-12-27&adults=8"
+      },
+      {
+        name: "Banyan Tree Villa",
+        area: "Siolim",
+        source: "Airbnb",
+        totalUsd: 2161,
+        sleeps: 8,
+        bedrooms: 4,
+        baths: 4.5,
+        pool: "private pool",
+        rating: 5.0,
+        reviews: 4,
+        url: "https://www.airbnb.co.uk/rooms/1712031567276607491?check_in=2026-12-19&check_out=2026-12-27&adults=8"
+      },
+      {
+        name: "4BR Villa with pool and lift",
+        area: "Arpora",
+        source: "Airbnb",
+        totalUsd: 2606,
+        sleeps: 10,
+        bedrooms: 4,
+        baths: 4.5,
+        pool: "private pool",
+        rating: 4.93,
+        reviews: 14,
+        url: "https://www.airbnb.co.uk/rooms/1561404763544288044?check_in=2026-12-19&check_out=2026-12-27&adults=8"
+      },
+      {
+        name: "4BHK Pet-friendly Villa",
+        area: "Siolim",
+        source: "Airbnb",
+        totalUsd: 2876,
+        sleeps: 12,
+        bedrooms: 4,
+        baths: 4,
+        pool: "pool",
+        rating: 4.94,
+        reviews: 49,
+        url: "https://www.airbnb.co.uk/rooms/1325082124967588435?check_in=2026-12-19&check_out=2026-12-27&adults=8"
+      }
+    ];
+
+    const days = [];
+    for (let d = DAY_START; d <= DAY_END; d++) days.push(d);
+
+    function weekday(day) {
+      return WEEKDAYS[new Date(YEAR, MONTH, day).getDay()];
+    }
+
+    function isWeekend(day) {
+      const wd = new Date(YEAR, MONTH, day).getDay();
+      return wd === 0 || wd === 6;
+    }
+
+    function formatDay(day) {
+      return `${day} Dec`;
+    }
+
+    function formatDayLong(day) {
+      return `${weekday(day)} ${day} Dec`;
+    }
+
+    function inr(amount) {
+      return "₹" + Math.round(amount).toLocaleString("en-IN");
+    }
+
+    function nightsOf(person) {
+      return person.leave - person.arrive;
+    }
+
+    function presentOn(person, day) {
+      return person.arrive <= day && day < person.leave;
+    }
+
+    function coveredNights(person) {
+      let n = 0;
+      for (let d = BOOKING.arrive; d < BOOKING.leave; d++) {
+        if (presentOn(person, d)) n += 1;
+      }
+      return n;
+    }
+
+    function occupancy(day) {
+      return guests.filter((g) => presentOn(g, day));
+    }
+
+    function propertyTotal(p) {
+      if (p.totalInr != null) return p.totalInr;
+      return Math.round(p.totalUsd * USD_INR);
+    }
+
+    const personNights = guests.reduce((sum, g) => sum + coveredNights(g), 0);
+
+    const occupancyByDay = days.map((d) => ({
+      day: d,
+      people: occupancy(d),
+      count: occupancy(d).length
+    }));
+
+    const busiest = occupancyByDay.reduce((best, row) =>
+      row.count > best.count ? row : best
+    );
+
+    const pricedProperties = properties
+      .map((p) => {
+        const total = propertyTotal(p);
+        return {
+          ...p,
+          total,
+          rate: total / personNights
+        };
+      })
+      .sort((a, b) => a.total - b.total);
+
+    function layoutOf(p) {
+      const bed = p.bedrooms === 1 ? "1 bedroom" : `${p.bedrooms} bedrooms`;
+      const bath = p.baths === 1 ? "1 bath" : `${p.baths} baths`;
+      return `${bed}, ${bath}, ${p.pool}`;
+    }
+
+    function ratingOf(p) {
+      const score = p.rating.toFixed(p.rating % 1 === 0 ? 1 : 2);
+      return `${score} (${p.reviews})`;
+    }
+
+    function barStyle(arrive, leave, color) {
+      const left = ((arrive - DAY_START) / days.length) * 100;
+      const width = ((leave - arrive) / days.length) * 100;
+      return `left:calc(${left}% + 5px);width:calc(${width}% - 10px);background:${color}`;
+    }
+
+    function cellClass(day) {
+      const parts = [];
+      if (isWeekend(day)) parts.push("weekend");
+      if (day === busiest.day) parts.push("peak");
+      if (day >= BOOKING.leave && day < DAY_END) parts.push("uncovered");
+      return parts.join(" ");
+    }
+
+    function renderStats() {
+      document.getElementById("stats").innerHTML = `
+        <div class="stat">
+          <span class="label">People</span>
+          <span class="value">${guests.length}</span>
+          <span class="hint">Coming to Goa</span>
+        </div>
+        <div class="stat">
+          <span class="label">Busiest night</span>
+          <span class="value">${formatDayLong(busiest.day)}</span>
+          <span class="hint">${busiest.count} people staying</span>
+        </div>
+        <div class="stat">
+          <span class="label">Dates</span>
+          <span class="value">19–28 Dec</span>
+          <span class="hint">First arrival to last departure</span>
+        </div>
+      `;
+    }
+
+    function renderGantt() {
+      const headDays = days.map((d) => `
+        <div class="day-h ${cellClass(d)}">
+          <span class="dow">${weekday(d)}</span>
+          <span class="num">${d}</span>
+        </div>
+      `).join("");
+
+      const rows = guests.map((g) => {
+        const cells = days.map((d) => `<div class="gantt-cell ${cellClass(d)}"></div>`).join("");
+        return `
+          <div class="gantt-row">
+            <div class="gantt-name">
+              <span class="pip" style="--person:${g.color}; background:${g.color}"></span>
+              ${g.name}
+            </div>
+            <div class="gantt-track">
+              ${cells}
+              <div class="bar" style="${barStyle(g.arrive, g.leave, g.color)}" title="${g.name}: ${formatDay(g.arrive)} → ${formatDay(g.leave)}"></div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("gantt").innerHTML = `
+        <div class="gantt-head">
+          <div class="gantt-name">Name</div>
+          ${headDays}
+        </div>
+        ${rows}
+      `;
+    }
+
+    function renderStays() {
+      const body = document.querySelector("#stays-table tbody");
+      body.innerHTML = guests.map((g) => `
+        <tr>
+          <td class="name-cell">
+            <span class="pip" style="background:${g.color}; display:inline-block; margin-right:0.45rem; vertical-align:middle"></span>${g.name}
+          </td>
+          <td>${formatDayLong(g.arrive)}</td>
+          <td>${formatDayLong(g.leave)}</td>
+          <td class="num">${nightsOf(g)}</td>
+        </tr>
+      `).join("");
+    }
+
+    let selectedNight = busiest.day;
+
+    function renderWho(day) {
+      const people = occupancy(day);
+      const names = people.map((p) => p.name);
+      const extra = day >= BOOKING.leave && people.length
+        ? " This night is not covered by the 19–27 Dec villa booking."
+        : "";
+      const list = names.length
+        ? names.join(", ")
+        : "No one is staying this night.";
+      document.getElementById("who").innerHTML = `
+        <strong>${formatDayLong(day)} · ${people.length} ${people.length === 1 ? "person" : "people"}</strong>
+        <p class="who-list">${list}.${extra}</p>
+      `;
+    }
+
+    function renderChart() {
+      const max = Math.max(...occupancyByDay.map((r) => r.count), 1);
+      const chart = document.getElementById("chart");
+      chart.innerHTML = occupancyByDay.map((row) => {
+        const height = row.count === 0 ? 3 : Math.max(8, (row.count / max) * 100);
+        const classes = [
+          "night",
+          isWeekend(row.day) ? "weekend" : "",
+          row.day === busiest.day ? "peak" : "",
+          row.day >= BOOKING.leave && row.count > 0 ? "uncovered" : "",
+          row.count === 0 ? "empty" : ""
+        ].filter(Boolean).join(" ");
+        return `
+          <button type="button" class="${classes}" data-day="${row.day}" aria-pressed="${row.day === selectedNight ? "true" : "false"}" role="listitem" aria-label="${formatDayLong(row.day)}, ${row.count} people">
+            <span class="col-wrap">
+              <span class="count">${row.count}</span>
+              <span class="col" style="height:${height}%"></span>
+            </span>
+            <span class="night-label">
+              <span class="n">${row.day}</span>
+              <span class="d">${weekday(row.day)}</span>
+            </span>
+          </button>
+        `;
+      }).join("");
+
+      chart.querySelectorAll(".night").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectedNight = Number(btn.dataset.day);
+          chart.querySelectorAll(".night").forEach((b) => {
+            b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+          });
+          renderWho(selectedNight);
+        });
+      });
+
+      renderWho(selectedNight);
+    }
+
+    function renderProperties() {
+      const body = document.querySelector("#props-table tbody");
+      body.innerHTML = pricedProperties.map((p) => `
+        <tr>
+          <td>
+            <a class="prop-name" href="${p.url}" target="_blank" rel="noopener noreferrer">${p.name}</a>
+            <span class="sub">${p.source}</span>
+          </td>
+          <td>${p.area}</td>
+          <td>${layoutOf(p)}</td>
+          <td class="num${p.sleeps < PEAK_GUESTS ? " sleeps-tight" : ""}">${p.sleeps}</td>
+          <td class="num">${ratingOf(p)}</td>
+          <td class="num">${inr(p.total)}</td>
+          <td class="num">${inr(p.rate)}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderSelect() {
+      const select = document.getElementById("property-select");
+      select.innerHTML = pricedProperties.map((p, i) =>
+        `<option value="${i}">${p.name} · ${inr(p.total)}</option>`
+      ).join("");
+      select.addEventListener("change", () => renderPays(Number(select.value)));
+      renderPays(0);
+    }
+
+    function renderPays(index) {
+
+      const p = pricedProperties[index];
+      const warn = document.getElementById("sleeps-warn");
+      if (PEAK_GUESTS > p.sleeps) {
+        warn.dataset.show = "true";
+        warn.textContent = `This villa sleeps ${p.sleeps}, but ${PEAK_GUESTS} people are staying on ${formatDayLong(busiest.day)}.`;
+      } else {
+        warn.dataset.show = "false";
+        warn.textContent = "";
+      }
+
+      document.getElementById("rate-chip").textContent =
+        `${inr(p.rate)} per person-night · ${personNights} person-nights`;
+
+      const rows = guests.map((g) => {
+        const covered = coveredNights(g);
+        const amount = Math.round(covered * p.rate);
+        return { g, covered, amount };
+      });
+
+      const body = document.querySelector("#pays-table tbody");
+      body.innerHTML = rows.map(({ g, covered, amount }) => `
+        <tr>
+          <td class="name-cell">
+            <span class="pip" style="background:${g.color}; display:inline-block; margin-right:0.45rem; vertical-align:middle"></span>${g.name}
+          </td>
+          <td class="num">${covered}</td>
+          <td class="num">${inr(amount)}</td>
+        </tr>
+      `).join("");
+
+      const totalRounded = rows.reduce((sum, r) => sum + r.amount, 0);
+      const drift = totalRounded - p.total;
+      document.querySelector("#pays-table tfoot").innerHTML = `
+        <tr>
+          <td>Total</td>
+          <td class="num">${personNights}</td>
+          <td class="num">${inr(p.total)}</td>
+        </tr>
+      `;
+      const driftNote = drift === 0
+        ? ""
+        : ` Rounded shares come to ${inr(totalRounded)}, ${inr(Math.abs(drift))} ${drift > 0 ? "over" : "under"} the listing, because amounts are rounded to the nearest rupee.`
+
+      const uncoveredPeople = guests.filter((g) => nightsOf(g) > coveredNights(g));
+      const note = document.getElementById("uncovered-note");
+      if (uncoveredPeople.length) {
+        const bits = uncoveredPeople.map((g) => {
+          const missed = nightsOf(g) - coveredNights(g);
+          return `${g.name}'s night of ${formatDay(g.leave - missed)} is not covered by the 19–27 Dec booking, so ${g.name.split(" ")[0]} is charged for ${coveredNights(g)} ${coveredNights(g) === 1 ? "night" : "nights"}, not ${nightsOf(g)}`;
+        });
+        note.textContent = bits.join(". ") + "." + driftNote;
+      } else {
+        note.textContent = driftNote.trim();
+      }
+    }
+
+    renderStats();
+    renderGantt();
+    renderStays();
+    renderChart();
+    renderProperties();
+    renderSelect();
+  </script>
+</body>
+</html>
