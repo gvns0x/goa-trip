@@ -1943,7 +1943,7 @@
       document.getElementById("villa-details").innerHTML = `
         <div class="villa-info">
           <h3>${esc(p.name)}</h3>
-          <p class="villa-price">${inr(p.total)} <span class="muted">total · ${inr(p.rate)} per person-night</span></p>
+          <p class="villa-price">${inr(p.total)} <span class="muted">· ${inr(p.rate)} per person-night</span></p>
           <a class="villa-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">Open listing</a>
           <div class="fact-row">${facts.map((f) => `<span class="fact">${esc(f)}</span>`).join("")}</div>
           ${checkBits.length ? `<p class="note">${esc(checkBits.join(" · "))}.</p>` : ""}
