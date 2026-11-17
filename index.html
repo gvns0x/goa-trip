@@ -365,7 +365,6 @@
     }
 
     td { font-size: 0.95rem; }
-    #stays-table td, #stays-table th,
     #props-table td, #props-table th,
     .villa-pays td, .villa-pays th { white-space: nowrap; }
     #props-table { min-width: 52rem; }
@@ -927,23 +926,6 @@
       <p class="legend">
         <span><i class="swatch peak-swatch"></i> Busiest night · Fri 25 Dec</span>
       </p>
-    </section>
-
-    <section aria-labelledby="stays-heading">
-      <h2 id="stays-heading">Stays</h2>
-      <div class="panel scroll">
-        <table id="stays-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Arrives</th>
-              <th>Leaves</th>
-              <th class="num">Nights</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
     </section>
 
     <section aria-labelledby="nights-heading">
@@ -2270,20 +2252,6 @@
       `;
     }
 
-    function renderStays() {
-      const body = document.querySelector("#stays-table tbody");
-      body.innerHTML = guests.map((g) => `
-        <tr>
-          <td class="name-cell">
-            <span class="pip" style="background:${g.color}; display:inline-block; margin-right:0.45rem; vertical-align:middle"></span>${g.name}
-          </td>
-          <td>${formatDayLong(g.arrive)}</td>
-          <td>${formatDayLong(g.leave)}</td>
-          <td class="num">${nightsOf(g)}</td>
-        </tr>
-      `).join("");
-    }
-
     let selectedNight = busiest.day;
 
     function renderWho(day) {
@@ -2424,7 +2392,6 @@
 
     renderStats();
     renderGantt();
-    renderStays();
     renderChart();
     renderProperties();
     renderGallery();
