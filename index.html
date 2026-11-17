@@ -381,110 +381,6 @@
       color: var(--ink-soft);
     }
 
-    /* Occupancy chart */
-    .chart {
-      padding: 1.15rem 1rem 1rem;
-    }
-
-    .chart-bars {
-      display: grid;
-      grid-template-columns: repeat(9, minmax(0, 1fr));
-      gap: 0.4rem;
-      align-items: end;
-      height: 11.5rem;
-    }
-
-    .night {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      border: 0;
-      background: none;
-      color: inherit;
-      font: inherit;
-      cursor: pointer;
-      border-radius: var(--radius-sm);
-    }
-
-    .col-wrap {
-      flex: 1 1 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.3rem;
-      min-height: 0;
-      width: 100%;
-    }
-
-    .night:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    .col {
-      width: 100%;
-      max-width: 2.6rem;
-      flex: 0 0 auto;
-      border-radius: 6px 6px 2px 2px;
-      background: var(--sea);
-      opacity: 0.78;
-      min-height: 2px;
-      transition: opacity 0.15s ease;
-    }
-
-    .night:hover .col,
-    .night[aria-pressed="true"] .col {
-      opacity: 1;
-    }
-
-    .night.peak .col { background: var(--accent); opacity: 0.9; }
-    .night.uncovered .col { background: var(--ink-soft); opacity: 0.55; }
-    .night.empty .col { background: var(--line-strong); opacity: 0.4; min-height: 3px; }
-
-    .count {
-      font-variant-numeric: tabular-nums;
-      font-size: 0.85rem;
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .night-label {
-      flex: 0 0 auto;
-      text-align: center;
-      line-height: 1.15;
-      padding-top: 0.35rem;
-    }
-
-    .night-label .n {
-      display: block;
-      font-variant-numeric: tabular-nums;
-      font-weight: 650;
-      font-size: 0.85rem;
-    }
-
-    .night-label .d {
-      display: block;
-      font-size: 0.65rem;
-      font-weight: 650;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
-    }
-
-    .who {
-      margin-top: 1rem;
-      padding-top: 0.9rem;
-      border-top: 1px solid var(--line);
-      font-size: 0.92rem;
-    }
-
-    .who strong { font-weight: 650; }
-    .who-list { margin: 0.35rem 0 0; color: var(--ink-soft); }
-
     /* Properties + pays */
     .prop-name { font-weight: 650; }
     .sleeps-tight { color: var(--warn-ink); font-weight: 650; }
@@ -887,9 +783,6 @@
       .villa-info, .villa-pays { padding: 1rem 0.9rem 1.2rem; }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .col { transition: none; }
-    }
   </style>
 </head>
 <body>
@@ -926,17 +819,6 @@
       <p class="legend">
         <span><i class="swatch peak-swatch"></i> Busiest night · Fri 25 Dec</span>
       </p>
-    </section>
-
-    <section aria-labelledby="nights-heading">
-      <h2 id="nights-heading">People staying each night</h2>
-      <p class="lede">Tap a night to see who is there. A guest counts on a night if they arrive that day or earlier, and leave after it.</p>
-      <div class="panel">
-        <div class="chart">
-          <div class="chart-bars" id="chart" role="list"></div>
-          <div class="who" id="who"></div>
-        </div>
-      </div>
     </section>
 
     <section aria-labelledby="props-heading">
@@ -2252,62 +2134,6 @@
       `;
     }
 
-    let selectedNight = busiest.day;
-
-    function renderWho(day) {
-      const people = occupancy(day);
-      const names = people.map((p) => p.name);
-      const extra = day >= BOOKING.leave && people.length
-        ? " This night is not covered by the 19–27 Dec villa booking."
-        : "";
-      const list = names.length
-        ? names.join(", ")
-        : "No one is staying this night.";
-      document.getElementById("who").innerHTML = `
-        <strong>${formatDayLong(day)} · ${people.length} ${people.length === 1 ? "person" : "people"}</strong>
-        <p class="who-list">${list}.${extra}</p>
-      `;
-    }
-
-    function renderChart() {
-      const max = Math.max(...occupancyByDay.map((r) => r.count), 1);
-      const chart = document.getElementById("chart");
-      chart.innerHTML = occupancyByDay.map((row) => {
-        const height = row.count === 0 ? 3 : Math.max(8, (row.count / max) * 100);
-        const classes = [
-          "night",
-          isWeekend(row.day) ? "weekend" : "",
-          row.day === busiest.day ? "peak" : "",
-          row.day >= BOOKING.leave && row.count > 0 ? "uncovered" : "",
-          row.count === 0 ? "empty" : ""
-        ].filter(Boolean).join(" ");
-        return `
-          <button type="button" class="${classes}" data-day="${row.day}" aria-pressed="${row.day === selectedNight ? "true" : "false"}" role="listitem" aria-label="${formatDayLong(row.day)}, ${row.count} people">
-            <span class="col-wrap">
-              <span class="count">${row.count}</span>
-              <span class="col" style="height:${height}%"></span>
-            </span>
-            <span class="night-label">
-              <span class="n">${row.day}</span>
-              <span class="d">${weekday(row.day)}</span>
-            </span>
-          </button>
-        `;
-      }).join("");
-
-      chart.querySelectorAll(".night").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          selectedNight = Number(btn.dataset.day);
-          chart.querySelectorAll(".night").forEach((b) => {
-            b.setAttribute("aria-pressed", b === btn ? "true" : "false");
-          });
-          renderWho(selectedNight);
-        });
-      });
-
-      renderWho(selectedNight);
-    }
-
     function renderProperties() {
       const body = document.querySelector("#props-table tbody");
       body.innerHTML = pricedProperties.map((p) => `
@@ -2392,7 +2218,6 @@
 
     renderStats();
     renderGantt();
-    renderChart();
     renderProperties();
     renderGallery();
   </script>
