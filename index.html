@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>Goa trip · 19–27 Dec 2026</title>
+  <title>Goa trip · 23–27 Dec 2026</title>
   <style>
     :root {
       --bg: #f3efe8;
@@ -181,8 +181,8 @@
     /* Timeline */
     .gantt {
       --name-col: 8.8rem;
-      --cols: 9;
-      min-width: 40rem;
+      --cols: 5;
+      min-width: 28rem;
     }
 
     .gantt-head,
@@ -790,13 +790,13 @@
     <header class="hero">
       <p class="kicker">Group trip</p>
       <h1>Goa trip</h1>
-      <p class="subtitle">19–27 Dec 2026</p>
+      <p class="subtitle">23–27 Dec 2026</p>
       <div class="stats" id="stats"></div>
     </header>
 
     <section aria-labelledby="gallery-heading">
       <h2 id="gallery-heading">Villa photos</h2>
-      <p class="lede">Tap a villa to switch photos and see what’s on the listing. Totals are for 19–27 Dec, 8 nights.</p>
+      <p class="lede">Tap a villa to switch photos and see what’s on the listing. Totals are for 23–27 Dec, 4 nights.</p>
       <div class="gallery-panel">
         <div class="villa-strip" id="villa-strip" role="tablist" aria-label="Villas"></div>
         <div class="gallery-stage" id="gallery-stage">
@@ -823,7 +823,7 @@
 
     <section aria-labelledby="props-heading">
       <h2 id="props-heading">Properties</h2>
-      <p class="lede">All quotes are for 19–27 Dec, 8 nights, 8 guests. Sorted from cheapest to most expensive.</p>
+      <p class="lede">Quotes checked 27 Nov 2026 for 23–27 Dec, 4 nights, 8 guests. Sorted from cheapest to most expensive.</p>
       <div class="panel scroll">
         <table id="props-table">
           <thead>
@@ -843,7 +843,7 @@
     </section>
 
     <footer class="page-foot">
-      Airbnb prices were converted from USD at ₹93.96/$ on 17 Nov 2026 and are approximate. Totals include fees as shown at the time. StayVista totals are the amount payable on 17 Nov 2026 for 19–27 Dec, including tax, after a 20% discount.
+      Airbnb prices were converted from USD at ₹93.96/$ and are the stay totals shown in search on 27 Nov 2026, before extra fees at checkout. StayVista totals are the amount payable on 27 Nov 2026 for 23–27 Dec, including tax, after a 20% discount.
     </footer>
   </div>
 
@@ -851,9 +851,9 @@
     const USD_INR = 93.96;
     const YEAR = 2026;
     const MONTH = 11; // December
-    const DAY_START = 19;
+    const DAY_START = 23;
     const DAY_END = 27;
-    const BOOKING = { arrive: 19, leave: 27 };
+    const BOOKING = { arrive: 23, leave: 27 };
     const PEAK_GUESTS = 8;
     const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const PALETTE = [
@@ -880,131 +880,138 @@
         name: "La Zamora Estate Villa 04",
         area: "Vagator",
         source: "The Blue Kite",
-        totalInr: 446890,
+        available: false,
+        availability: "Blocked through 23 Dec",
         sleeps: 7,
         bedrooms: 3,
         baths: 3,
         pool: "private pool",
         rating: 5.0,
         reviews: 40,
-        url: "https://www.thebluekite.com/goa/vagator/villas/la-zamora-estate-villa-04"
+        url: "https://www.thebluekite.com/goa/vagator/villas/la-zamora-estate-villa-04?from=2026-12-23&to=2026-12-27&adults=8"
       },
       {
         name: "3BR Pvt Pool near Thalassa",
         area: "Siolim",
         source: "Airbnb",
-        totalUsd: 1674,
+        availability: "Not in dated search",
         sleeps: 8,
         bedrooms: 3,
         baths: 4,
         pool: "plunge pool",
         rating: 5.0,
         reviews: 4,
-        url: "https://www.airbnb.co.uk/rooms/1795012544737897511?check_in=2026-12-19&check_out=2026-12-27&adults=8"
+        url: "https://www.airbnb.co.uk/rooms/1795012544737897511?check_in=2026-12-23&check_out=2026-12-27&adults=8"
       },
       {
         name: "Evaya Zest 3BHK Villa",
         area: "Assagao",
         source: "Airbnb",
-        totalUsd: 1873,
+        available: true,
+        totalUsd: 1369.30,
         sleeps: 8,
         bedrooms: 3,
         baths: 4,
         pool: "plunge pool",
         rating: 5.0,
         reviews: 14,
-        url: "https://www.airbnb.co.uk/rooms/1726780161697151139?check_in=2026-12-19&check_out=2026-12-27&adults=8"
+        url: "https://www.airbnb.co.uk/rooms/1726780161697151139?check_in=2026-12-23&check_out=2026-12-27&adults=8"
       },
       {
         name: "Banyan Tree Villa",
         area: "Siolim",
         source: "Airbnb",
-        totalUsd: 2161,
+        availability: "Not in dated search",
         sleeps: 8,
         bedrooms: 4,
         baths: 4.5,
         pool: "private pool",
         rating: 5.0,
         reviews: 4,
-        url: "https://www.airbnb.co.uk/rooms/1712031567276607491?check_in=2026-12-19&check_out=2026-12-27&adults=8"
+        url: "https://www.airbnb.co.uk/rooms/1712031567276607491?check_in=2026-12-23&check_out=2026-12-27&adults=8"
       },
       {
         name: "4BR Villa with pool and lift",
         area: "Arpora",
         source: "Airbnb",
-        totalUsd: 2606,
+        available: true,
+        totalUsd: 1914.58,
         sleeps: 10,
         bedrooms: 4,
         baths: 4.5,
         pool: "private pool",
         rating: 4.93,
         reviews: 14,
-        url: "https://www.airbnb.co.uk/rooms/1561404763544288044?check_in=2026-12-19&check_out=2026-12-27&adults=8"
+        url: "https://www.airbnb.co.uk/rooms/1561404763544288044?check_in=2026-12-23&check_out=2026-12-27&adults=8"
       },
       {
         name: "4BHK Pet-friendly Villa",
         area: "Siolim",
         source: "Airbnb",
-        totalUsd: 2876,
+        availability: "Not in dated search",
         sleeps: 12,
         bedrooms: 4,
         baths: 4,
         pool: "pool",
         rating: 4.94,
         reviews: 49,
-        url: "https://www.airbnb.co.uk/rooms/1325082124967588435?check_in=2026-12-19&check_out=2026-12-27&adults=8"
+        url: "https://www.airbnb.co.uk/rooms/1325082124967588435?check_in=2026-12-23&check_out=2026-12-27&adults=8"
       },
       {
         name: "The YG Manor",
         area: "Anjuna",
         source: "StayVista",
-        totalInr: 443300,
+        available: true,
+        totalInr: 271192,
         sleeps: 10,
         bedrooms: 4,
         baths: 4,
         pool: "private pool",
         rating: 4.9,
         reviews: 20,
-        url: "https://www.stayvista.com/villa/the-yg-manor?checkin=2026-12-19&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=4"
+        url: "https://www.stayvista.com/villa/the-yg-manor?checkin=2026-12-23&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=4"
       },
       {
         name: "Villa Amethyst",
         area: "Saligao",
         source: "StayVista",
-        totalInr: 321101,
+        available: true,
+        totalInr: 217073,
         sleeps: 12,
         bedrooms: 4,
         baths: 4,
         pool: "shared pool",
         rating: 4.33,
         reviews: 98,
-        url: "https://www.stayvista.com/villa/villa-amethyst-saligao-4-bhk-villa-in-goa-with-spacious-rooms?checkin=2026-12-19&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=4"
+        url: "https://www.stayvista.com/villa/villa-amethyst-saligao-4-bhk-villa-in-goa-with-spacious-rooms?checkin=2026-12-23&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=4"
       },
       {
         name: "Casa De Sai",
         area: "Assagao",
         source: "StayVista",
-        totalInr: 444178,
+        available: true,
+        totalInr: 257667,
         sleeps: 10,
         bedrooms: 4,
         baths: 4,
         pool: "private pool",
         rating: 4.8,
         reviews: 12,
-        url: "https://www.stayvista.com/villa/casa-de-sai?checkin=2026-12-19&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=4"
+        url: "https://www.stayvista.com/villa/casa-de-sai?checkin=2026-12-23&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=4"
       },
       {
         name: "Casa Joe",
         area: "Vagator",
         source: "StayVista",
-        totalInr: 433733,
+        available: true,
+        totalInr: 244366,
         sleeps: 8,
         bedrooms: 3,
         baths: 4,
         pool: "private pool",
         rating: 4.8,
         reviews: 73,
-        url: "https://www.stayvista.com/villa/casa-joe?checkin=2026-12-19&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=3"
+        url: "https://www.stayvista.com/villa/casa-joe?checkin=2026-12-23&checkout=2026-12-27&adult=8&child=0&infant=0&rooms_booked=3"
       }
     ];
 
@@ -1054,7 +1061,8 @@
 
     function propertyTotal(p) {
       if (p.totalInr != null) return p.totalInr;
-      return Math.round(p.totalUsd * USD_INR);
+      if (p.totalUsd != null) return Math.round(p.totalUsd * USD_INR);
+      return null;
     }
 
     const personNights = guests.reduce((sum, g) => sum + coveredNights(g), 0);
@@ -1075,10 +1083,15 @@
         return {
           ...p,
           total,
-          rate: total / personNights
+          rate: total == null ? null : total / personNights
         };
       })
-      .sort((a, b) => a.total - b.total);
+      .sort((a, b) => {
+        if (a.total == null && b.total == null) return 0;
+        if (a.total == null) return 1;
+        if (b.total == null) return -1;
+        return a.total - b.total;
+      });
 
     function layoutOf(p) {
       const bed = p.bedrooms === 1 ? "1 bedroom" : `${p.bedrooms} bedrooms`;
@@ -1092,8 +1105,11 @@
     }
 
     function barStyle(arrive, leave, color) {
-      const left = ((arrive - DAY_START) / days.length) * 100;
-      const width = ((leave - arrive) / days.length) * 100;
+      const start = Math.max(arrive, DAY_START);
+      const end = Math.min(leave, DAY_END);
+      if (end <= start) return "display:none";
+      const left = ((start - DAY_START) / days.length) * 100;
+      const width = ((end - start) / days.length) * 100;
       return `left:calc(${left}% + 5px);width:calc(${width}% - 10px);background:${color}`;
     }
 
@@ -1766,7 +1782,7 @@
           "Gated community; caretaker 9 am–6 pm"
         ],
         "notes": [
-          "StayVista amount payable ₹4,43,300 for 19–27 Dec, 4 rooms, including tax, after a 20% discount."
+          "StayVista amount payable ₹2,71,192 for 23–27 Dec, 4 rooms, including tax, after a 20% discount. All 4 rooms were free on 27 Nov 2026."
         ],
         "photos": [
           { "src": "https://img.vistarooms.com/gallery/the-yg-manor-2684fa.jpg", "alt": "Exterior" },
@@ -1801,7 +1817,7 @@
           "Kitchen is included for guest cooking"
         ],
         "notes": [
-          "StayVista amount payable ₹3,21,101 for 19–27 Dec, 4 rooms, including tax, after a 20% discount."
+          "StayVista amount payable ₹2,17,073 for 23–27 Dec, 4 rooms, including tax, after a 20% discount. All 4 rooms were free on 27 Nov 2026."
         ],
         "photos": [
           { "src": "https://img.vistarooms.com/gallery/villa-amethyst-1d5ed9.jpg", "alt": "Swimming pool" },
@@ -1837,7 +1853,7 @@
           "Standalone house; caretaker 9:30 am–6:30 pm"
         ],
         "notes": [
-          "StayVista amount payable ₹4,44,178 for 19–27 Dec, 4 rooms, including tax, after a 20% discount."
+          "StayVista amount payable ₹2,57,667 for 23–27 Dec, 4 rooms, including tax, after a 20% discount. All 4 rooms were free on 27 Nov 2026."
         ],
         "photos": [
           { "src": "https://img.vistarooms.com/gallery/casa-de-sai-2de49a.jpg", "alt": "Swimming pool" },
@@ -1872,7 +1888,7 @@
           "Gated community; caretaker 8 am–8 pm"
         ],
         "notes": [
-          "StayVista amount payable ₹4,33,733 for 19–27 Dec, 3 rooms, including tax, after a 20% discount."
+          "StayVista amount payable ₹2,44,366 for 23–27 Dec, 3 rooms, including tax, after a 20% discount. All 3 rooms were free on 27 Nov 2026."
         ],
         "photos": [
           { "src": "https://img.vistarooms.com/gallery/casa-joe-f603c5.jpg", "alt": "Exterior" },
@@ -1997,7 +2013,7 @@
             ${src ? `<img src="${esc(src)}" alt="" loading="lazy" width="200" height="130">` : ""}
             <span class="villa-thumb-meta">
               <span class="villa-thumb-name">${esc(item.name)}</span>
-              <span class="villa-thumb-price">${inr(item.total)}</span>
+              <span class="villa-thumb-price">${item.total == null ? esc(item.availability || "No quote") : inr(item.total)}</span>
             </span>
           </button>
         `;
@@ -2045,7 +2061,7 @@
       document.getElementById("villa-details").innerHTML = `
         <div class="villa-info">
           <h3>${esc(p.name)}</h3>
-          <p class="villa-price">${inr(p.total)} <span class="muted">· ${inr(p.rate)} per person-night</span></p>
+          <p class="villa-price">${p.total == null ? esc(p.availability || "No quote") : `${inr(p.total)} <span class="muted">· ${inr(p.rate)} per person-night</span>`}</p>
           <a class="villa-link" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">Open listing</a>
           <div class="fact-row">${facts.map((f) => `<span class="fact">${esc(f)}</span>`).join("")}</div>
           ${checkBits.length ? `<p class="note">${esc(checkBits.join(" · "))}.</p>` : ""}
@@ -2095,8 +2111,8 @@
         </div>
         <div class="stat">
           <span class="label">Dates</span>
-          <span class="value">19–27 Dec</span>
-          <span class="hint">First arrival to last departure</span>
+          <span class="value">23–27 Dec</span>
+          <span class="hint">4 nights, check-in to checkout</span>
         </div>
       `;
     }
@@ -2140,20 +2156,53 @@
         <tr>
           <td>
             <a class="prop-name" href="${p.url}" target="_blank" rel="noopener noreferrer">${p.name}</a>
-            <span class="sub">${p.source}</span>
+            <span class="sub">${p.availability ? `${p.source} · ${p.availability}` : p.source}</span>
           </td>
           <td>${p.area}</td>
           <td>${layoutOf(p)}</td>
           <td class="num${p.sleeps < PEAK_GUESTS ? " sleeps-tight" : ""}">${p.sleeps}</td>
           <td class="num">${ratingOf(p)}</td>
-          <td class="num">${inr(p.total)}</td>
-          <td class="num">${inr(p.rate)}</td>
+          <td class="num">${p.total == null ? "—" : inr(p.total)}</td>
+          <td class="num">${p.rate == null ? "—" : inr(p.rate)}</td>
         </tr>
       `).join("");
     }
 
+    function outsideNights(person) {
+      const missed = [];
+      for (let d = person.arrive; d < person.leave; d++) {
+        if (d < BOOKING.arrive || d >= BOOKING.leave) missed.push(d);
+      }
+      return missed;
+    }
+
+    function nightSpan(list) {
+      if (!list.length) return "";
+      const ranges = [];
+      let start = list[0];
+      let end = list[0];
+      for (const day of list.slice(1)) {
+        if (day === end + 1) end = day;
+        else {
+          ranges.push([start, end]);
+          start = end = day;
+        }
+      }
+      ranges.push([start, end]);
+      return ranges.map(([a, b]) => a === b ? formatDay(a) : `${a}–${b} Dec`).join(" and ");
+    }
+
     function paysMarkup(index) {
       const p = pricedProperties[index];
+      if (p.total == null) {
+        const why = p.available === false
+          ? "The Blue Kite calendar blocks this villa through 23 Dec, so check-in on 23 Dec is not open."
+          : "This listing did not show up in Airbnb search for 23–27 Dec with 8 guests, so there is no current total.";
+        return `
+          <h3 id="villa-pays-heading">What each person pays</h3>
+          <p class="note">${esc(why)}</p>
+        `;
+      }
       const rows = guests.map((g) => {
         const covered = coveredNights(g);
         const amount = Math.round(covered * p.rate);
@@ -2165,12 +2214,17 @@
         ? ""
         : ` Rounded shares come to ${inr(totalRounded)}, ${inr(Math.abs(drift))} ${drift > 0 ? "over" : "under"} the listing, because amounts are rounded to the nearest rupee.`;
 
-      const uncoveredPeople = guests.filter((g) => nightsOf(g) > coveredNights(g));
+      const uncoveredPeople = guests.filter((g) => outsideNights(g).length);
       let note = "";
       if (uncoveredPeople.length) {
         const bits = uncoveredPeople.map((g) => {
-          const missed = nightsOf(g) - coveredNights(g);
-          return `${g.name}'s night of ${formatDay(g.leave - missed)} is not covered by the 19–27 Dec booking, so ${g.name.split(" ")[0]} is charged for ${coveredNights(g)} ${coveredNights(g) === 1 ? "night" : "nights"}, not ${nightsOf(g)}`;
+          const missed = outsideNights(g);
+          const covered = coveredNights(g);
+          const who = g.name.split(" ")[0];
+          if (!covered) {
+            return `${g.name} leaves on check-in day, so ${who} is not charged`;
+          }
+          return `${g.name}'s ${missed.length === 1 ? "night" : "nights"} of ${nightSpan(missed)} ${missed.length === 1 ? "is" : "are"} outside the 23–27 Dec booking, so ${who} is charged for ${covered} nights, not ${nightsOf(g)}`;
         });
         note = bits.join(". ") + "." + driftNote;
       } else {
